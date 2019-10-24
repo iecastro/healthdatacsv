@@ -15,5 +15,9 @@ URL: https://github.com/iecastro/healthdatacsv
 BugReports: https://github.com/iecastro/healthdatacsv/issues
 Imports: 
     dplyr,
-    httr
+    httr,
+    jsonlite,
+    purrr,
+    stringr,
+    tidyr
 RoxygenNote: 6.1.1

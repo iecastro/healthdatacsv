@@ -1,6 +1,16 @@
 #' Helper function  to extract names of agencies cataloged in healthdata.gov
 #'
+#' @param namecheck enter partial name or initials of agency to search catalog for
+#'        string pattern. Use title case.
+#'        Defaults to NULL and pulls all agencies cataloged in API
 #'
+#' @return a one-column tibble of names
+#' @examples \dontrun{
+#' list_agencies()
+#' list_agencies("Institute")
+#' list_agencies("Substance Abuse")
+#' }
+#' @export
 
 list_agencies <- function(namecheck = NULL){
 
@@ -38,7 +48,16 @@ list_agencies <- function(namecheck = NULL){
 }
 
 
-
+#' Helper function to extract keywords listed in API
+#'
+#' @param agency enter full agency name in title case to pull keywords tagged in agency's products.
+#'        Defaults to NULL and pulls all keywords cataloged
+#' @return a tibble with publisher (agency) name(s) and respective keywords
+#' @examples \dontrun{
+#' get_keywords()
+#' get_keywords("Centers for Disease Control and Prevention")
+#' }
+#' @export
 
 get_keywords <- function(agency = NULL){
 

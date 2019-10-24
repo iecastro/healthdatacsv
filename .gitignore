@@ -1,0 +1,6 @@
+.Rproj.user
+.Rhistory
+.RData
+healthdatacsv.Rcheck/
+healthdatacsv*.tar.gz
+healthdatacsv*.tgz

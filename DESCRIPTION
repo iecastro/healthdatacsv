@@ -1,11 +1,11 @@
 Package: healthdatacsv
-Title: What the Package Does (One Line, Title Case)
+Title: Access and download data from the healthdata.gov catalog
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Ivan",
+           family = "Castro",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "ivedcastr@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: What license it uses

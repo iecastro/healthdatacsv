@@ -1,4 +1,8 @@
-list_agencies <- function(){
+#' Helper function  to extract names of agencies cataloged in healthdata.gov
+#'
+#'
+
+list_agencies <- function(namecheck = NULL){
 
   base_url <- "http://www.healthdata.gov/api"
 
@@ -8,12 +12,29 @@ list_agencies <- function(){
 
   parsed_dataset <- parsed$dataset
 
-  pubs <- jsonlite::flatten(parsed_dataset) %>%
-    as_tibble() %>%
-    select(publisher.name)%>%
-    distinct()
+  if (is.null(namecheck)){
 
-  print(pubs)
+    pubs <- jsonlite::flatten(parsed_dataset) %>%
+      as_tibble() %>%
+      select(publisher.name)%>%
+      distinct()
+
+  } else {
+
+    x <- namecheck
+
+    pubs <- jsonlite::flatten(parsed_dataset) %>%
+      as_tibble() %>%
+      select(publisher.name)%>%
+      distinct() %>%
+      mutate(partial_match =
+               stringr::str_detect(publisher.name, x)) %>%
+      filter(partial_match == TRUE) %>%
+      select(-partial_match)
+
+  }
+
+  return(pubs)
 }
 
 

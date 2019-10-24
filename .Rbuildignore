@@ -4,3 +4,4 @@
 ^healthdatacsv.*\.tar\.gz$
 ^healthdatacsv.*\.tgz$
 ^examples.R
+^LICENSE\.md$

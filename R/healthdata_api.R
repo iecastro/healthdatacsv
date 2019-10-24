@@ -1,7 +1,3 @@
-library(dplyr)
-library(httr)
-
-
 fetch_catalog <- function(agency = NULL,
                           keyword = NULL){
 

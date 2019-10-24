@@ -13,3 +13,7 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/iecastro/healthdatacsv
 BugReports: https://github.com/iecastro/healthdatacsv/issues
+Imports: 
+    dplyr,
+    httr
+RoxygenNote: 6.1.1

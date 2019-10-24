@@ -19,9 +19,6 @@ fetch_catalog <- function(agency = NULL,
              modified,
              distribution,
              keyword) %>%
-      #tidyr::unnest(cols = c(distribution)) %>%
-      #filter(format == "csv") %>%
-      #select(- `@type`, -mediaType, -title, -accessURL, -format)
       mutate(csv_avail =
                suppressMessages(stringr::str_detect(distribution, "csv")))
 
@@ -35,10 +32,7 @@ fetch_catalog <- function(agency = NULL,
              modified,
              distribution,
              keyword)  %>%
-      #tidyr::unnest(cols = c(distribution)) %>%
-      filter( #format == "csv" &
-               publisher.name == agency)  %>%
-      #select(- `@type`, -mediaType, -title, -accessURL, -format)
+      filter(publisher.name == agency)  %>%
       mutate(csv_avail =
                suppressMessages(stringr::str_detect(distribution, "csv")))
 
@@ -76,8 +70,7 @@ fetch_csv <- function(data){
            -format, -csv_avail, -is_csv) %>%
     mutate(data_file =
              purrr::map(downloadURL, ~GET(.) %>%
-                          content() #%>%
-                        #tidyr::nest()
+                          content()
              ))
 }
 

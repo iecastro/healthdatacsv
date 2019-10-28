@@ -14,11 +14,7 @@
 
 list_agencies <- function(namecheck = NULL){
 
-  base_url <- "http://www.healthdata.gov/api"
-
-  data_url <- modify_url(base_url, path = "data.json") %>% GET()
-
-  parsed <- jsonlite::fromJSON(content(data_url, "text"))
+  parsed <- healthdata_api()
 
   parsed_dataset <- parsed$dataset
 
@@ -62,11 +58,7 @@ list_agencies <- function(namecheck = NULL){
 
 get_keywords <- function(agency = NULL){
 
-  base_url <- "http://www.healthdata.gov/api"
-
-  data_url <- modify_url(base_url, path = "data.json") %>% GET()
-
-  parsed <- jsonlite::fromJSON(content(data_url, "text"))
+  parsed <- healthdata_api()
 
   parsed_dataset <- parsed$dataset
 

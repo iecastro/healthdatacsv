@@ -23,11 +23,7 @@
 fetch_catalog <- function(agency = NULL,
                           keyword = NULL){
 
-  base_url <- "http://www.healthdata.gov/api"
-
-  data_url <- modify_url(base_url, path = "data.json") %>% GET()
-
-  parsed <- jsonlite::fromJSON(content(data_url, "text"))
+  parsed <- healthdata_api()
 
   parsed_dataset <- parsed$dataset
 
@@ -115,5 +111,38 @@ fetch_csv <- function(catalog){
                           content()
              ))
 }
+
+#' healdata.gov API call for data.json endpoint
+#' @keywords internal
+
+healthdata_api <- function(path = "data.json"){
+
+  user <- user_agent("http://github.com/iecastro/healthdatacsv")
+
+  data_url <- modify_url("http://www.healthdata.gov/api",
+                         path = path)
+
+  response <- GET(data_url, user)
+
+  parsed <- jsonlite::fromJSON(content(response, "text"))
+
+  if (http_error(response)) {
+    stop(
+      sprintf(
+        "HealthData.gov API request failed [%s]\n%s\n<%s>",
+        status_code(resp),
+        parsed$message,
+        parsed$documentation_url
+      ),
+      call. = FALSE
+    )
+  }
+
+  return(parsed)
+
+}
+
+
+
 
 

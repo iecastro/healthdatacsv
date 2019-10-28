@@ -5,3 +5,4 @@
 ^healthdatacsv.*\.tgz$
 ^examples.R
 ^LICENSE\.md$
+^README\.Rmd$

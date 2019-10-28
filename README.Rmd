@@ -1,0 +1,100 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  message = FALSE,
+  warning = FALSE
+)
+
+devtools::load_all()
+
+```
+
+# healthdatacsv
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+The goal of healthdatacsv is to query the healthdata.gov API and 
+
+## Installation
+
+You can install the development version of **healthdatacsv** from [GitHub](https://github.com/) with:
+
+``` {r, eval = FALSE}
+install.packages("remotes")
+
+remotes::install_github("iecastro/healthdatacsv")
+
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(healthdatacsv)
+
+# query API based on keywords
+fetch_catalog(keyword = "alcohol|drugs")
+
+# query API and dowload data
+fetch_catalog("Centers for Disease Control and Prevention",
+                               keyword = "built environment") %>% 
+  fetch_csv()
+
+
+```
+
+
+## Basic workflow
+
+**healthdatacsv** is pipe friendly, so it's easy to integrate into a tidy workflow. For example, say you're interested in searching CDC datasets related to the built environment.  
+
+Let's fetch the catalog of available data products:
+
+```{r}
+cdc_built_env <- fetch_catalog("Centers for Disease Control and Prevention",
+                               keyword = "built environment")
+
+cdc_built_env
+
+```
+
+In this case, there is only one product available.  To learn more, you can simply `pull` the description:
+
+```{r}
+cdc_built_env %>%
+  pull(description)
+
+```
+
+This dataset relates to state legislation on nutrition, physical activity, and obesity during 2001-2017.  Data only includes enacted legislation.
+
+To download the data, we pass the catalog df to the `fetch_csv` function.  Since there is only one dataset to download, we can `unnest` in the same pipe.  *If the catalog has more than one product that you'll like to keep, it is recommended to unnest each product separately.* If the catalog consists of several time points of the same dataset, you could unnest in one pipe, given all column names are the same. 
+
+
+```{r}
+data_raw <- cdc_built_env %>%
+  fetch_csv() %>% #> 
+  tidyr::unnest(data_file)
+
+data_raw %>%
+  glimpse()
+
+```
+
+### Info
+
+Development of this package is partly supported by a research grant from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant #R34AA026745. This product is not endorsed nor certified by either healthdata.gov or NIH/NIAAA.
+
+

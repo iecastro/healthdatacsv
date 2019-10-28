@@ -1,3 +1,9 @@
+#' Function to fetch the current available catalog from healthdata.gov
+#' This function allows to pull the
+#'
+#' fetch_catalog("Centers for Disease Control and Prevention")
+#' cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention", keyword = "alcohol|alcohol use")
+
 fetch_catalog <- function(agency = NULL,
                           keyword = NULL){
 
@@ -11,7 +17,8 @@ fetch_catalog <- function(agency = NULL,
 
   if (is.null(agency)) {
 
-    catalog <- jsonlite::flatten(parsed_dataset) %>%
+    catalog <-
+      jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
       select(publisher.name,
              product = title,
@@ -20,11 +27,12 @@ fetch_catalog <- function(agency = NULL,
              distribution,
              keyword) %>%
       mutate(csv_avail =
-               suppressMessages(stringr::str_detect(distribution, "csv")))
+          stringr::str_detect(distribution, "csv"))
 
   } else {
 
-    catalog <- jsonlite::flatten(parsed_dataset) %>%
+    catalog <-
+      jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
       select(publisher.name,
              product = title,
@@ -34,22 +42,24 @@ fetch_catalog <- function(agency = NULL,
              keyword)  %>%
       filter(publisher.name == agency)  %>%
       mutate(csv_avail =
-               suppressMessages(stringr::str_detect(distribution, "csv")))
+               stringr::str_detect(distribution, "csv"))
 
   }
 
   if (is.null(keyword)){
 
-    return(catalog %>%
+    return(
+      catalog %>%
              select(-keyword))
 
   } else {
 
     x <- keyword
 
-    return(catalog %>%
+    return(
+      catalog %>%
              mutate(keyword = purrr::map(keyword,
-                                         suppressMessages(stringr::str_detect), x),
+                                         stringr::str_detect, x),
                     keyword = purrr::map_lgl(keyword, any)) %>%
              filter(keyword == TRUE) %>%
              select(-keyword))
@@ -59,15 +69,15 @@ fetch_catalog <- function(agency = NULL,
 
 
 
-fetch_csv <- function(data){
+fetch_csv <- function(catalog){
 
-  data %>%
+  catalog %>%
     tidyr::unnest(cols = c(distribution)) %>%
     mutate(is_csv = stringr::str_detect(downloadURL, "csv")) %>%
     filter(csv_avail == TRUE &
              is_csv == TRUE) %>%
-    select(- `@type`, -mediaType, -title, -accessURL,
-           -format, -csv_avail, -is_csv) %>%
+    select(publisher.name, product, description,
+           modified, downloadURL) %>%
     mutate(data_file =
              purrr::map(downloadURL, ~GET(.) %>%
                           content()

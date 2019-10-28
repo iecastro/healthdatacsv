@@ -7,7 +7,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "ivedcastr@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: This package will make an API call to the data.json endpoint of HealthData.gov 
+             and download data if available in csv format.  Some helper functions available
+             help users first query by listed Agency and/or keywords.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

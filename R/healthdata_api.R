@@ -1,8 +1,24 @@
 #' Function to fetch the current available catalog from healthdata.gov
-#' This function allows to pull the
+#' This function allows to pull the catalog in its entirety or filter by
+#' agency, keyword(s), or both
 #'
+#' @param agency name of agency to pull in API call.
+#'        This requires the full agency name in proper case. Function list_agencies() can
+#'        be used for a list of available agencies.
+#'        Defaults to NULL.
+#' @param keyword keyword(s) to pull in API call.
+#'        This argument can be supplied on its own or with an agency argument.  The
+#'        keyword argument uses regular expression to detect presence of pattern in a string.
+#'        Function get_keywords() can be used for a list of exact keywords available in API.
+#'        Defaults to NULL.
+#' @return a tibble with descriptive metadata of the available catalog including a nested
+#'         list-column of the data distribution
+#' @examples \dontrun{
 #' fetch_catalog("Centers for Disease Control and Prevention")
-#' cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention", keyword = "alcohol|alcohol use")
+#' cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
+#'                           keyword = "alcohol|alcohol use")
+#' }
+#' @export
 
 fetch_catalog <- function(agency = NULL,
                           keyword = NULL){
@@ -68,6 +84,22 @@ fetch_catalog <- function(agency = NULL,
 }
 
 
+
+#' Function to fetch data from the healthdata.gov API
+#' This function will pull data if available from healthdata.gov in csv format
+#'
+#' @param catalog this argument requires a catalog (tibble) created with fetch_catalog()
+#' @return a nested tibble with descriptive metadata of a data product and a list-column
+#'         of the available dataset.
+#' @examples \dontrun{
+#' cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
+#'                           keyword = "alcohol|alcohol use")
+#'
+#' nested_df_alc <- cdc_alc %>%
+#'    slice(1:2) %>%  # pull Alzheimer's and Chronic Indicators datasets
+#'    fetch_csv()
+#' }
+#' @export
 
 fetch_csv <- function(catalog){
 

@@ -22,6 +22,7 @@ devtools::load_all()
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build status](https://travis-ci.org/iecastro/healthdatacsv.svg?branch=master)](https://travis-ci.org/iecastro/healthdatacsv)
 <!-- badges: end -->
 
 **healthdatacsv** allows users to query the [healthdata.gov API](https://healthdata.gov/node/25341) catalog and return tidy data frames. This package focuses on the data.json endpoint and will download datasets if available via file download, namely, in csv format.  

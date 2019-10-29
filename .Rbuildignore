@@ -6,3 +6,4 @@
 ^examples.R
 ^LICENSE\.md$
 ^README\.Rmd$
+^\.travis\.yml$

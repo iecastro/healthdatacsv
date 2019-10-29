@@ -49,6 +49,7 @@ list_agencies <- function(namecheck = NULL){
 #' @param agency enter full agency name in title case (results from list_agencies()) to pull keywords
 #'        tagged in the listed agency's products.
 #'        Defaults to NULL and pulls all keywords cataloged
+#' @param data_viewer if TRUE, keywords are loaded to the data viewer
 #' @return a tibble with publisher (agency) name(s) and respective keywords
 #' @examples \dontrun{
 #' get_keywords()
@@ -56,7 +57,8 @@ list_agencies <- function(namecheck = NULL){
 #' }
 #' @export
 
-get_keywords <- function(agency = NULL){
+get_keywords <- function(agency = NULL,
+                         data_viewer = FALSE){
 
   parsed <- healthdata_api()
 
@@ -83,10 +85,18 @@ get_keywords <- function(agency = NULL){
 
   }
 
-  View(keywords)
+  if (isTRUE(data_viewer)){
 
-  return(keywords)
+    View(keywords)
+    return(keywords)
+
+  } else {
+
+    return(keywords)
+
+  }
 
 }
+
 
 

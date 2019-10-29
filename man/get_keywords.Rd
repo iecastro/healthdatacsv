@@ -4,12 +4,14 @@
 \alias{get_keywords}
 \title{Helper function to extract keywords listed in the healthdata.gov API}
 \usage{
-get_keywords(agency = NULL)
+get_keywords(agency = NULL, data_viewer = FALSE)
 }
 \arguments{
 \item{agency}{enter full agency name in title case (results from list_agencies()) to pull keywords
 tagged in the listed agency's products.
 Defaults to NULL and pulls all keywords cataloged}
+
+\item{data_viewer}{if TRUE, keywords are loaded to the data viewer}
 }
 \value{
 a tibble with publisher (agency) name(s) and respective keywords

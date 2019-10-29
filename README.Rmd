@@ -117,12 +117,20 @@ list_agencies() %>%
 
 `get_keywords()` will extract all keywords cataloged. The function accepts a full *agency* name (in proper title case) as argument; or it can be run with the default value for a data frame of all keywords and agencies cataloged.
 
-```{r, eval=FALSE}
+```{r}
 
 get_keywords("National Institute on Drug Abuse (NIDA), National Institutes of Health (NIH)")
 
 ```
 
+Additionally, this object can be loaded to the data viewer for easier filtering, and text search by setting the `data_viewer` argument to `TRUE`:
+
+```{r, eval = FALSE}
+
+get_keywords("National Institute on Drug Abuse (NIDA), National Institutes of Health (NIH)",
+             data_viewer = TRUE)
+
+```
 
 
 #### Info

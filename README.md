@@ -223,6 +223,27 @@ agencies cataloged.
 ``` r
 
 get_keywords("National Institute on Drug Abuse (NIDA), National Institutes of Health (NIH)")
+#> # A tibble: 8 x 2
+#>   publisher.name                                           keyword         
+#>   <chr>                                                    <chr>           
+#> 1 National Institute on Drug Abuse (NIDA), National Insti… alcohol         
+#> 2 National Institute on Drug Abuse (NIDA), National Insti… drug abuse      
+#> 3 National Institute on Drug Abuse (NIDA), National Insti… health care pro…
+#> 4 National Institute on Drug Abuse (NIDA), National Insti… Providers       
+#> 5 National Institute on Drug Abuse (NIDA), National Insti… screening tool  
+#> 6 National Institute on Drug Abuse (NIDA), National Insti… tobacco         
+#> 7 National Institute on Drug Abuse (NIDA), National Insti… chat day        
+#> 8 National Institute on Drug Abuse (NIDA), National Insti… nida
+```
+
+Additionally, this object can be loaded to the data viewer for easier
+filtering, and text search by setting the `data_viewer` argument to
+`TRUE`:
+
+``` r
+
+get_keywords("National Institute on Drug Abuse (NIDA), National Institutes of Health (NIH)",
+             data_viewer = TRUE)
 ```
 
 #### Info

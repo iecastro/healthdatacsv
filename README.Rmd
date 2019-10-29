@@ -24,7 +24,7 @@ devtools::load_all()
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of healthdatacsv is to query the healthdata.gov API and 
+**healthdatacsv** allows users to query the [healthdata.gov API](https://healthdata.gov/node/25341) catalog and return tidy data frames. This package focuses on the data.json endpoint and will download datasets if available via file download, namely, in csv format.  
 
 ## Installation
 
@@ -93,7 +93,39 @@ data_raw %>%
 
 ```
 
-### Info
+
+### Some helper functions
+
+`list_agencies()` will query and download names of agencies listed in the catalog. You can enter partial name or initials of agency of interest to check if it has data cataloged in the API. Argument relies on [regular expression](https://stringr.tidyverse.org/articles/regular-expressions.html) to detect string matches.
+
+```{r}
+
+list_agencies("NIH|CDC|FDA")
+
+list_agencies("Institute|Drug")
+
+```
+
+The resulting dataframe will depend on matches to the string supplied. To pull all agencies cataloged, simply use `list_agencies` with the default argument:
+
+```{r}
+
+list_agencies() %>% 
+  print(n=Inf)
+
+```
+
+`get_keywords()` will extract all keywords cataloged. The function accepts a full *agency* name (in proper title case) as argument; or it can be run with the default value for a data frame of all keywords and agencies cataloged.
+
+```{r, eval=FALSE}
+
+get_keywords("National Institute on Drug Abuse (NIDA), National Institutes of Health (NIH)")
+
+```
+
+
+
+#### Info
 
 Development of this package is partly supported by a research grant from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant #R34AA026745. This product is not endorsed nor certified by either healthdata.gov or NIH/NIAAA.
 

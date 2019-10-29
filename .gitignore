@@ -4,3 +4,4 @@
 healthdatacsv.Rcheck/
 healthdatacsv*.tar.gz
 healthdatacsv*.tgz
+examples.R

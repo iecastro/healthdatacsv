@@ -21,7 +21,7 @@ Function get_keywords() can be used for a list of exact keywords available in AP
 Defaults to NULL.}
 }
 \value{
-a tibble with descriptive metadata of the available catalog including a nested
+a [tibble][tibble::tibble-package] with descriptive metadata of the available catalog including a nested
         list-column of the data distribution
 }
 \description{

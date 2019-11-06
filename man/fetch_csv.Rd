@@ -11,7 +11,7 @@ fetch_csv(catalog)
 \item{catalog}{this argument requires a catalog (tibble) created with fetch_catalog()}
 }
 \value{
-a nested tibble with descriptive metadata of a data product and a list-column
+a [tibble][tibble::tibble-package] with descriptive metadata of a data product and a list-column
         of the available dataset.
 }
 \description{

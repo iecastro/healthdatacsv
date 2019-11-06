@@ -11,7 +11,7 @@
 #'        keyword argument uses regular expression to detect presence of pattern in a string.
 #'        Function get_keywords() can be used for a list of exact keywords available in API.
 #'        Defaults to NULL.
-#' @return a tibble with descriptive metadata of the available catalog including a nested
+#' @return a [tibble][tibble::tibble-package] with descriptive metadata of the available catalog including a nested
 #'         list-column of the data distribution
 #' @examples
 #' \dontrun{
@@ -90,7 +90,7 @@ fetch_catalog <- function(agency = NULL,
 #' This function will pull data if available from healthdata.gov in csv format
 #'
 #' @param catalog this argument requires a catalog (tibble) created with fetch_catalog()
-#' @return a nested tibble with descriptive metadata of a data product and a list-column
+#' @return a [tibble][tibble::tibble-package] with descriptive metadata of a data product and a list-column
 #'         of the available dataset.
 #' @examples
 #' \dontrun{

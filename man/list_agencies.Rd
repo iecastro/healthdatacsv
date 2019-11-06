@@ -12,7 +12,7 @@ string pattern. Use title case.
 Defaults to NULL and pulls all agencies cataloged in API}
 }
 \value{
-a one-column tibble of names
+a [tibble][tibble::tibble-package] of names
 }
 \description{
 Helper function  to extract names of agencies cataloged in the healthdata.gov API

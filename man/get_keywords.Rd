@@ -14,7 +14,7 @@ Defaults to NULL and pulls all keywords cataloged}
 \item{data_viewer}{if TRUE, keywords are loaded to the data viewer}
 }
 \value{
-a tibble with publisher (agency) name(s) and respective keywords
+a [tibble][tibble::tibble-package] with publisher (agency) name(s) and respective keywords
 }
 \description{
 Helper function to extract keywords listed in the healthdata.gov API

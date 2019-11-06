@@ -9,4 +9,5 @@
 #' @importFrom stringr str_detect
 #' @importFrom purrr map map_lgl
 #' @importFrom tidyr unnest
+#' @importFrom tibble tibble
 NULL

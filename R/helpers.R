@@ -5,39 +5,37 @@
 #'        Defaults to NULL and pulls all agencies cataloged in API
 #'
 #' @return a one-column tibble of names
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' list_agencies()
 #' list_agencies("Institute")
 #' list_agencies("Substance Abuse")
 #' }
 #' @export
 
-list_agencies <- function(namecheck = NULL){
-
+list_agencies <- function(namecheck = NULL) {
   parsed <- healthdata_api()
 
   parsed_dataset <- parsed$dataset
 
-  if (is.null(namecheck)){
-
+  if (is.null(namecheck)) {
     pubs <- jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
-      select(publisher.name)%>%
+      select(publisher.name) %>%
       distinct()
-
   } else {
-
     x <- namecheck
 
     pubs <- jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
-      select(publisher.name)%>%
+      select(publisher.name) %>%
       distinct() %>%
-      mutate(partial_match =
-               stringr::str_detect(publisher.name, x)) %>%
+      mutate(
+        partial_match =
+          stringr::str_detect(publisher.name, x)
+      ) %>%
       filter(partial_match == TRUE) %>%
       select(-partial_match)
-
   }
 
   return(pubs)
@@ -51,52 +49,44 @@ list_agencies <- function(namecheck = NULL){
 #'        Defaults to NULL and pulls all keywords cataloged
 #' @param data_viewer if TRUE, keywords are loaded to the data viewer
 #' @return a tibble with publisher (agency) name(s) and respective keywords
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' get_keywords()
 #' get_keywords("Centers for Disease Control and Prevention")
 #' }
 #' @export
 
 get_keywords <- function(agency = NULL,
-                         data_viewer = FALSE){
-
+                         data_viewer = FALSE) {
   parsed <- healthdata_api()
 
   parsed_dataset <- parsed$dataset
 
-  if (is.null(agency)){
-
+  if (is.null(agency)) {
     keywords <- jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
-      select(publisher.name,
-             keyword)  %>%
+      select(
+        publisher.name,
+        keyword
+      ) %>%
       tidyr::unnest(cols = c(keyword)) %>%
       distinct()
-
   } else {
-
     keywords <- jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
-      select(publisher.name,
-             keyword)  %>%
+      select(
+        publisher.name,
+        keyword
+      ) %>%
       tidyr::unnest(cols = c(keyword)) %>%
       distinct() %>%
       filter(publisher.name == agency)
-
   }
 
-  if (isTRUE(data_viewer)){
-
+  if (isTRUE(data_viewer)) {
     View(keywords)
     return(keywords)
-
   } else {
-
     return(keywords)
-
   }
-
 }
-
-
-

@@ -13,70 +13,75 @@
 #'        Defaults to NULL.
 #' @return a tibble with descriptive metadata of the available catalog including a nested
 #'         list-column of the data distribution
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' fetch_catalog("Centers for Disease Control and Prevention")
 #' cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
-#'                           keyword = "alcohol|alcohol use")
+#'   keyword = "alcohol|alcohol use"
+#' )
 #' }
 #' @export
 
 fetch_catalog <- function(agency = NULL,
-                          keyword = NULL){
-
+                          keyword = NULL) {
   parsed <- healthdata_api()
 
   parsed_dataset <- parsed$dataset
 
   if (is.null(agency)) {
-
     catalog <-
       jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
       select(publisher.name,
-             product = title,
-             description,
-             modified,
-             distribution,
-             keyword) %>%
-      mutate(csv_avail =
-          stringr::str_detect(distribution, "csv"))
-
+        product = title,
+        description,
+        modified,
+        distribution,
+        keyword
+      ) %>%
+      mutate(
+        csv_avail =
+          stringr::str_detect(distribution, "csv")
+      )
   } else {
-
     catalog <-
       jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
       select(publisher.name,
-             product = title,
-             description,
-             modified,
-             distribution,
-             keyword)  %>%
-      filter(publisher.name == agency)  %>%
-      mutate(csv_avail =
-               stringr::str_detect(distribution, "csv"))
-
+        product = title,
+        description,
+        modified,
+        distribution,
+        keyword
+      ) %>%
+      filter(publisher.name == agency) %>%
+      mutate(
+        csv_avail =
+          stringr::str_detect(distribution, "csv")
+      )
   }
 
-  if (is.null(keyword)){
-
+  if (is.null(keyword)) {
     return(
       catalog %>%
-             select(-keyword))
-
+        select(-keyword)
+    )
   } else {
-
     x <- keyword
 
     return(
       catalog %>%
-             mutate(keyword = purrr::map(keyword,
-                                         stringr::str_detect, x),
-                    keyword = purrr::map_lgl(keyword, any)) %>%
-             filter(keyword == TRUE) %>%
-             select(-keyword))
+        mutate(
+          keyword = purrr::map(
+            keyword,
+            stringr::str_detect, x
+          ),
+          keyword = purrr::map_lgl(keyword, any)
+        ) %>%
+        filter(keyword == TRUE) %>%
+        select(-keyword)
+    )
   }
-
 }
 
 
@@ -87,40 +92,44 @@ fetch_catalog <- function(agency = NULL,
 #' @param catalog this argument requires a catalog (tibble) created with fetch_catalog()
 #' @return a nested tibble with descriptive metadata of a data product and a list-column
 #'         of the available dataset.
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
-#'                           keyword = "alcohol|alcohol use")
+#'   keyword = "alcohol|alcohol use"
+#' )
 #'
 #' nested_df_alc <- cdc_alc %>%
-#'    slice(1:2) %>%  # pull Alzheimer's and Chronic Indicators datasets
-#'    fetch_csv()
+#'   slice(1:2) %>% # pull Alzheimer's and Chronic Indicators datasets
+#'   fetch_csv()
 #' }
 #' @export
 
-fetch_csv <- function(catalog){
-
+fetch_csv <- function(catalog) {
   catalog %>%
     tidyr::unnest(cols = c(distribution)) %>%
     mutate(is_csv = stringr::str_detect(downloadURL, "csv")) %>%
     filter(csv_avail == TRUE &
-             is_csv == TRUE) %>%
-    select(publisher.name, product, description,
-           modified, downloadURL) %>%
-    mutate(data_file =
-             purrr::map(downloadURL, ~GET(.) %>%
-                          content()
-             ))
+      is_csv == TRUE) %>%
+    select(
+      publisher.name, product, description,
+      modified, downloadURL
+    ) %>%
+    mutate(
+      data_file =
+        purrr::map(downloadURL, ~ GET(.) %>%
+          content())
+    )
 }
 
 #' healdata.gov API call for data.json endpoint
 #' @keywords internal
 
-healthdata_api <- function(path = "data.json"){
-
+healthdata_api <- function(path = "data.json") {
   user <- user_agent("http://github.com/iecastro/healthdatacsv")
 
   data_url <- modify_url("http://www.healthdata.gov/api",
-                         path = path)
+    path = path
+  )
 
   response <- GET(data_url, user)
 
@@ -139,10 +148,4 @@ healthdata_api <- function(path = "data.json"){
   }
 
   return(parsed)
-
 }
-
-
-
-
-

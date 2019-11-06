@@ -33,6 +33,7 @@ agency, keyword(s), or both
 \dontrun{
 fetch_catalog("Centers for Disease Control and Prevention")
 cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
-                          keyword = "alcohol|alcohol use")
+  keyword = "alcohol|alcohol use"
+)
 }
 }

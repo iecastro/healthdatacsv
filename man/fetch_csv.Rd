@@ -21,10 +21,11 @@ This function will pull data if available from healthdata.gov in csv format
 \examples{
 \dontrun{
 cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
-                          keyword = "alcohol|alcohol use")
+  keyword = "alcohol|alcohol use"
+)
 
 nested_df_alc <- cdc_alc \%>\%
-   slice(1:2) \%>\%  # pull Alzheimer's and Chronic Indicators datasets
-   fetch_csv()
+  slice(1:2) \%>\% # pull Alzheimer's and Chronic Indicators datasets
+  fetch_csv()
 }
 }

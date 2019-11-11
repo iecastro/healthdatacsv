@@ -33,39 +33,41 @@ fetch_catalog <- function(agency = NULL,
     catalog <-
       jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
-      select(publisher.name,
-        product = title,
-        description,
-        modified,
-        distribution,
-        keyword
+      select(
+        .data$publisher.name,
+        product = .data$title,
+        .data$description,
+        .data$modified,
+        .data$distribution,
+        .data$keyword
       ) %>%
       mutate(
         csv_avail =
-          stringr::str_detect(distribution, "csv")
+          stringr::str_detect(.data$distribution, "csv")
       )
   } else {
     catalog <-
       jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
-      select(publisher.name,
-        product = title,
-        description,
-        modified,
-        distribution,
-        keyword
+      select(
+        .data$publisher.name,
+        product = .data$title,
+        .data$description,
+        .data$modified,
+        .data$distribution,
+        .data$keyword
       ) %>%
-      filter(publisher.name == agency) %>%
+      filter(.data$publisher.name == agency) %>%
       mutate(
         csv_avail =
-          stringr::str_detect(distribution, "csv")
+          stringr::str_detect(.data$distribution, "csv")
       )
   }
 
   if (is.null(keyword)) {
     return(
       catalog %>%
-        select(-keyword)
+        select(-.data$keyword)
     )
   } else {
     x <- keyword
@@ -79,8 +81,8 @@ fetch_catalog <- function(agency = NULL,
           ),
           keyword = purrr::map_lgl(keyword, any)
         ) %>%
-        filter(keyword == TRUE) %>%
-        select(-keyword)
+        filter(.data$keyword == TRUE) %>%
+        select(-.data$keyword)
     )
   }
 }
@@ -108,18 +110,21 @@ fetch_catalog <- function(agency = NULL,
 
 fetch_csv <- function(catalog) {
   catalog %>%
-    tidyr::unnest(cols = c(distribution)) %>%
-    mutate(is_csv = stringr::str_detect(downloadURL, "csv")) %>%
-    filter(csv_avail == TRUE &
-      is_csv == TRUE) %>%
+    tidyr::unnest(cols = c(.data$distribution)) %>%
+    mutate(is_csv = stringr::str_detect(.data$downloadURL, "csv")) %>%
+    filter(.data$csv_avail == TRUE &
+      .data$is_csv == TRUE) %>%
     select(
-      publisher.name, product, description,
-      modified, downloadURL
+      .data$publisher.name,
+      .data$product,
+      .data$description,
+      .data$modified,
+      .data$downloadURL
     ) %>%
     mutate(
       data_file =
-        purrr::map(downloadURL, ~ GET(.) %>%
-          content())
+        purrr::map(.data$downloadURL, ~ httr::GET(.) %>%
+          httr::content())
     )
 }
 
@@ -135,13 +140,13 @@ healthdata_api <- function(path = "data.json") {
 
   response <- GET(data_url, user)
 
-  parsed <- jsonlite::fromJSON(content(response, "text"))
+  parsed <- jsonlite::fromJSON(httr::content(response, "text"))
 
   if (http_error(response)) {
     stop(
       sprintf(
         "HealthData.gov API request failed [%s]\n%s\n<%s>",
-        status_code(resp),
+        status_code(response),
         parsed$message,
         parsed$documentation_url
       ),

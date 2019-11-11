@@ -21,21 +21,21 @@ list_agencies <- function(namecheck = NULL) {
   if (is.null(namecheck)) {
     pubs <- jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
-      select(publisher.name) %>%
+      select(.data$publisher.name) %>%
       distinct()
   } else {
     x <- namecheck
 
     pubs <- jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
-      select(publisher.name) %>%
+      select(.data$publisher.name) %>%
       distinct() %>%
       mutate(
         partial_match =
-          stringr::str_detect(publisher.name, x)
+          stringr::str_detect(.data$publisher.name, x)
       ) %>%
-      filter(partial_match == TRUE) %>%
-      select(-partial_match)
+      filter(.data$partial_match == TRUE) %>%
+      select(-.data$partial_match)
   }
 
   return(pubs)
@@ -67,21 +67,21 @@ get_keywords <- function(agency = NULL,
     keywords <- jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
       select(
-        publisher.name,
-        keyword
+        .data$publisher.name,
+        .data$keyword
       ) %>%
-      tidyr::unnest(cols = c(keyword)) %>%
+      tidyr::unnest(cols = c(.data$keyword)) %>%
       distinct()
   } else {
     keywords <- jsonlite::flatten(parsed_dataset) %>%
       as_tibble() %>%
       select(
-        publisher.name,
-        keyword
+        .data$publisher.name,
+        .data$keyword
       ) %>%
-      tidyr::unnest(cols = c(keyword)) %>%
+      tidyr::unnest(cols = c(.data$keyword)) %>%
       distinct() %>%
-      filter(publisher.name == agency)
+      filter(.data$publisher.name == agency)
   }
 
   if (isTRUE(data_viewer)) {

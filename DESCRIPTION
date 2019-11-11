@@ -23,5 +23,6 @@ Imports:
     stringr,
     tidyr,
     tibble,
-    magrittr
+    magrittr,
+    rlang
 RoxygenNote: 6.1.1

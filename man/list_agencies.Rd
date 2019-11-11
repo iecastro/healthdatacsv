@@ -7,8 +7,8 @@
 list_agencies(namecheck = NULL)
 }
 \arguments{
-\item{namecheck}{enter partial name or initials of agency to search catalog for
-string pattern. Use title case.
+\item{namecheck}{enter partial name or initials of agency to search
+catalog for string pattern. Use title case.
 Defaults to NULL and pulls all agencies cataloged in API}
 }
 \value{

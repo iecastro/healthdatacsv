@@ -10,19 +10,20 @@ fetch_catalog(agency = NULL, keyword = NULL)
 }
 \arguments{
 \item{agency}{name of agency to pull in API call.
-This requires the full agency name in proper case. Function list_agencies() can
-be used for a list of available agencies.
-Defaults to NULL.}
+This requires the full agency name in proper case.
+Function list_agencies() can be used for a list of
+available agencies. Defaults to NULL.}
 
 \item{keyword}{keyword(s) to pull in API call.
 This argument can be supplied on its own or with an agency argument.  The
-keyword argument uses regular expression to detect presence of pattern in a string.
-Function get_keywords() can be used for a list of exact keywords available in API.
-Defaults to NULL.}
+keyword argument uses regular expression to detect presence of
+pattern in a string. Function get_keywords() can be used for a list
+of exact keywords available in API. Defaults to NULL.}
 }
 \value{
-a [tibble][tibble::tibble-package] with descriptive metadata of the available catalog including a nested
-        list-column of the data distribution
+a [tibble][tibble::tibble-package] with descriptive metadata of
+        the available catalog including a nested list-column of the
+        data distribution.
 }
 \description{
 Function to fetch the current available catalog from healthdata.gov

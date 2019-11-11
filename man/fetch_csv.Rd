@@ -8,11 +8,12 @@ This function will pull data if available from healthdata.gov in csv format}
 fetch_csv(catalog)
 }
 \arguments{
-\item{catalog}{this argument requires a catalog (tibble) created with fetch_catalog()}
+\item{catalog}{this argument requires a catalog (tibble) created
+with fetch_catalog()}
 }
 \value{
-a [tibble][tibble::tibble-package] with descriptive metadata of a data product and a list-column
-        of the available dataset.
+a [tibble][tibble::tibble-package] with descriptive metadata
+        of a data product and a list-column of the available dataset.
 }
 \description{
 Function to fetch data from the healthdata.gov API

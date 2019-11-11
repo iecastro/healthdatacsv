@@ -1,12 +1,11 @@
 Package: healthdatacsv
 Title: Access and download data from the healthdata.gov catalog
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person(given = "Ivan",
            family = "Castro",
            role = c("aut", "cre"),
-           email = "ivedcastr@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "ivedcastr@gmail.com")
 Description: This package will make an API call to the data.json endpoint of HealthData.gov 
              and download data if available in csv format.  Some helper functions available
              help users first query by listed Agency and/or keywords.

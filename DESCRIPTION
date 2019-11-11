@@ -22,5 +22,6 @@ Imports:
     purrr,
     stringr,
     tidyr,
-    tibble
+    tibble,
+    magrittr
 RoxygenNote: 6.1.1

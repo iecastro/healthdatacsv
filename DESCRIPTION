@@ -6,22 +6,23 @@ Authors@R:
            family = "Castro",
            role = c("aut", "cre"),
            email = "ivedcastr@gmail.com")
-Description: This package will make an API call to the data.json endpoint of HealthData.gov 
-             and download data if available in csv format.  Some helper functions available
-             help users first query by listed Agency and/or keywords.
+Description: This package will make an API call to the
+    data.json endpoint of HealthData.gov and download data if available in
+    csv format.  Some helper functions available help users first query by
+    listed Agency and/or keywords.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
 URL: https://github.com/iecastro/healthdatacsv
 BugReports: https://github.com/iecastro/healthdatacsv/issues
 Imports: 
     dplyr,
     httr,
     jsonlite,
-    purrr,
-    stringr,
-    tidyr,
-    tibble,
     magrittr,
-    rlang
+    purrr,
+    rlang,
+    stringr,
+    tibble,
+    tidyr
+Encoding: UTF-8
+LazyData: true
 RoxygenNote: 6.1.1

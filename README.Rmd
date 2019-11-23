@@ -18,10 +18,10 @@ devtools::load_all()
 
 ```
 
-# healthdatacsv
+# healthdatacsv <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis build status](https://travis-ci.org/iecastro/healthdatacsv.svg?branch=master)](https://travis-ci.org/iecastro/healthdatacsv)
 <!-- badges: end -->
 
@@ -44,6 +44,7 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(healthdatacsv)
+library(dplyr)
 
 # query API based on keywords
 fetch_catalog(keyword = "alcohol|drugs")

@@ -1,12 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# healthdatacsv
+# healthdatacsv <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis build
 status](https://travis-ci.org/iecastro/healthdatacsv.svg?branch=master)](https://travis-ci.org/iecastro/healthdatacsv)
 <!-- badges: end -->
@@ -33,6 +33,7 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(healthdatacsv)
+library(dplyr)
 
 # query API based on keywords
 fetch_catalog(keyword = "alcohol|drugs")
@@ -195,8 +196,8 @@ list_agencies() %>%
 #> # A tibble: 31 x 1
 #>    publisher.name                                                          
 #>    <chr>                                                                   
-#>  1 Centers for Disease Control and Prevention                              
-#>  2 Centers for Medicare & Medicaid Services                                
+#>  1 Centers for Medicare & Medicaid Services                                
+#>  2 Centers for Disease Control and Prevention                              
 #>  3 Office of the National Coordinator for Health Information Technology    
 #>  4 U.S. Food and Drug Administration                                       
 #>  5 Substance Abuse & Mental Health Services Administration                 
@@ -257,20 +258,20 @@ frame of all keywords and agencies cataloged.
 ``` r
 
 get_keywords()
-#> # A tibble: 3,155 x 2
-#>    publisher.name                        keyword                           
-#>    <chr>                                 <chr>                             
-#>  1 Centers for Disease Control and Prev… antibody                          
-#>  2 Centers for Disease Control and Prev… chlamydia trachomatis             
-#>  3 Centers for Disease Control and Prev… division of parasitic diseases an…
-#>  4 Centers for Disease Control and Prev… latent class                      
-#>  5 Centers for Medicare & Medicaid Serv… directory                         
-#>  6 Centers for Medicare & Medicaid Serv… medical equipment                 
-#>  7 Centers for Medicare & Medicaid Serv… supplier                          
-#>  8 Centers for Medicare & Medicaid Serv… supplies                          
-#>  9 Centers for Disease Control and Prev… leading causes of death           
-#> 10 Centers for Disease Control and Prev… mortality                         
-#> # … with 3,145 more rows
+#> # A tibble: 3,161 x 2
+#>    publisher.name                           keyword          
+#>    <chr>                                    <chr>            
+#>  1 Centers for Medicare & Medicaid Services directory        
+#>  2 Centers for Medicare & Medicaid Services medical equipment
+#>  3 Centers for Medicare & Medicaid Services supplier         
+#>  4 Centers for Medicare & Medicaid Services supplies         
+#>  5 Centers for Medicare & Medicaid Services care             
+#>  6 Centers for Medicare & Medicaid Services hospice          
+#>  7 Centers for Medicare & Medicaid Services hospice care     
+#>  8 Centers for Medicare & Medicaid Services list             
+#>  9 Centers for Medicare & Medicaid Services applications     
+#> 10 Centers for Medicare & Medicaid Services child enrollment 
+#> # … with 3,151 more rows
 ```
 
 Additionally, keywords object can be loaded to the data viewer for

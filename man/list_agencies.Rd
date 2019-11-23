@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{list_agencies}
 \alias{list_agencies}
-\title{Helper function  to extract names of agencies cataloged in the healthdata.gov API}
+\title{Function to extract names of agencies cataloged in the healthdata.gov API}
 \usage{
 list_agencies(namecheck = NULL)
 }
@@ -15,7 +15,7 @@ Defaults to NULL and pulls all agencies cataloged in API}
 a [tibble][tibble::tibble-package] of names
 }
 \description{
-Helper function  to extract names of agencies cataloged in the healthdata.gov API
+Function to extract names of agencies cataloged in the healthdata.gov API
 }
 \examples{
 \dontrun{

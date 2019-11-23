@@ -1,4 +1,4 @@
-#' Helper function  to extract names of agencies cataloged in the healthdata.gov API
+#' Function to extract names of agencies cataloged in the healthdata.gov API
 #'
 #' @param namecheck enter partial name or initials of agency to search
 #'        catalog for string pattern. Use title case.

@@ -15,8 +15,8 @@ Function list_agencies() can be used for a list of
 available agencies. Defaults to NULL.}
 
 \item{keyword}{keyword(s) to pull in API call.
-This argument can be supplied on its own or with an agency argument.  The
-keyword argument uses regular expression to detect presence of
+This argument can be supplied on its own or with an agency argument.
+The keyword argument uses regular expression to detect presence of
 pattern in a string. Function get_keywords() can be used for a list
 of exact keywords available in API. Defaults to NULL.}
 }

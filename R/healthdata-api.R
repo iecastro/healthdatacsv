@@ -109,11 +109,11 @@ fetch_catalog <- function(agency = NULL,
 #' @export
 
 fetch_csv <- function(catalog) {
-  catalog %>%
+  csv_list <- catalog %>%
     tidyr::unnest(cols = c(.data$distribution)) %>%
     mutate(is_csv = stringr::str_detect(.data$downloadURL, "csv")) %>%
     filter(.data$csv_avail == TRUE &
-      .data$is_csv == TRUE) %>%
+             .data$is_csv == TRUE) %>%
     select(
       .data$publisher.name,
       .data$product,
@@ -124,8 +124,10 @@ fetch_csv <- function(catalog) {
     mutate(
       data_file =
         purrr::map(.data$downloadURL, ~ httr::GET(.) %>%
-          httr::content())
+                     httr::content())
     )
+
+  return(csv_list)
 }
 
 #' healdata.gov API call for data.json endpoint

@@ -43,7 +43,7 @@ fetch_catalog <- function(agency = NULL,
       ) %>%
       mutate(
         csv_avail =
-          stringr::str_detect(.data$distribution, "csv")
+          suppressWarnings(stringr::str_detect(.data$distribution, "csv"))
       )
   } else {
     catalog <-
@@ -60,20 +60,18 @@ fetch_catalog <- function(agency = NULL,
       filter(.data$publisher.name == agency) %>%
       mutate(
         csv_avail =
-          stringr::str_detect(.data$distribution, "csv")
+          suppressWarnings(stringr::str_detect(.data$distribution, "csv"))
       )
   }
 
   if (is.null(keyword)) {
-    return(
-      catalog %>%
+    return(catalog %>%
         select(-.data$keyword)
     )
   } else {
     x <- keyword
 
-    return(
-      catalog %>%
+    return(catalog %>%
         mutate(
           keyword = purrr::map(
             keyword,

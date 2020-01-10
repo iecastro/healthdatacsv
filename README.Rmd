@@ -39,7 +39,7 @@ remotes::install_github("iecastro/healthdatacsv")
 
 ```
 
-## Example
+## Examples
 
 ```{r}
 library(healthdatacsv)
@@ -50,7 +50,6 @@ Basic examples which show you how to use **healthdatacsv**:
 - Querying API based on keywords:  
 
 ```{r example}
-
 fetch_catalog(keyword = "alcohol|drugs")
 
 ```
@@ -58,7 +57,6 @@ fetch_catalog(keyword = "alcohol|drugs")
 - Querying API and downloading data for single product:  
 
 ```{r}
-
 fetch_catalog("Centers for Disease Control and Prevention",
                                keyword = "built environment") %>% 
   fetch_csv()
@@ -68,7 +66,7 @@ fetch_catalog("Centers for Disease Control and Prevention",
 - Querying API and downloading data for multiple data products.  Data will be nested in a list-column:  
 
 ```{r} 
-library(dplyr) # for table manipulation
+library(dplyr) # for table manipulation verbs
 
 # query catalog
 fetch_catalog(keyword = "alcohol")
@@ -80,13 +78,13 @@ fetch_catalog(keyword = "alcohol") %>%
 
 ```
 
-`fetch_csv()` wraps the [vroom](https://vroom.r-lib.org/) function which helps quickly read relatively large delimited files:  
+`fetch_csv()` wraps the [vroom](https://vroom.r-lib.org/) function, which helps quickly read relatively large delimited files:  
 
 ```{r}
 # PRAMS data
 # CDC surveillance for reproductive health
 
-# query catalog for availabel products
+# query catalog for available products
 fetch_catalog(keyword = "reproductive health") %>% 
   select(1:2)
 
@@ -99,14 +97,6 @@ prams <- fetch_catalog(keyword = "reproductive health") %>%
 
 prams %>% 
   select(product, data_tbl)
-
-```
-
-
-```{r}
-prams %>% 
-  slice(1) %>% 
-  unnest(cols = data_tbl)
 
 ```
 
@@ -125,23 +115,23 @@ cdc_built_env
 
 ```
 
-In this case, there is only one product available.  To learn more, you can simply `pull` the description:
+In this case, there is only one product available.  To learn more about the dataset, you can simply `pull` the description:
 
 ```{r}
 cdc_built_env %>%
-  pull(description)
+  dplyr::pull(description)
 
 ```
 
 This dataset relates to state legislation on nutrition, physical activity, and obesity during 2001-2017.  Data only includes enacted legislation.
 
-To download the data, we pass the catalog df to the `fetch_csv` function.  Since there is only one dataset to download, we can `unnest` in the same pipe.  *If the catalog has more than one product that you'ld like to keep, it is recommended to unnest each product separately.* If the catalog consists of several time points of the same dataset, you could unnest in one pipe, given all column names are the same. 
+To download the data, we pass the catalog df to the `fetch_csv` function.  Since there is only one dataset to download, we can `unnest` in the same pipe.  *If the catalog has more than one product that you'd like to keep, it is recommended to unnest each product separately.* If the catalog consists of several time points of the same dataset, you could unnest in one pipe, given all column names are the same. 
 
 
 ```{r}
 data_raw <- cdc_built_env %>%
   fetch_csv() %>% #> 
-  tidyr::unnest(data_file)
+  tidyr::unnest(data_tbl)
 
 data_raw %>%
   glimpse()
@@ -164,7 +154,6 @@ list_agencies("Institute|Drug")
 The resulting dataframe will depend on matches to the string supplied. To pull all agencies cataloged, simply use `list_agencies` with the default argument:
 
 ```{r}
-
 list_agencies() %>% 
   print(n=Inf)
 
@@ -173,7 +162,6 @@ list_agencies() %>%
 `get_keywords()` will extract all keywords cataloged. The function accepts as argument a full *agency* name (in proper title case) which can be obtained with `list_agencies`.  
 
 ```{r}
-
 get_keywords("National Institutes of Health (NIH)")
 
 ```
@@ -182,7 +170,6 @@ get_keywords("National Institutes of Health (NIH)")
 Conversely, this function can be run with the default value for a data frame of all keywords and agencies cataloged.
 
 ```{r}
-
 get_keywords()
 
 ```
@@ -190,7 +177,6 @@ get_keywords()
 Additionally, keywords object can be loaded to the data viewer for easier filtering, and text search by setting the `data_viewer` argument to `TRUE`:
 
 ```{r, eval = FALSE}
-
 get_keywords("National Institutes of Health (NIH)",
              data_viewer = TRUE)
 

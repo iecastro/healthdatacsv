@@ -23,19 +23,22 @@ You can install the development version of **healthdatacsv** from
 
 ``` r
 install.packages("remotes")
-
 remotes::install_github("iecastro/healthdatacsv")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Examples
 
 ``` r
 library(healthdatacsv)
-library(dplyr)
+```
 
-# query API based on keywords
+Basic examples which show you how to use **healthdatacsv**:
+
+  - Querying API based on keywords:
+
+<!-- end list -->
+
+``` r
 fetch_catalog(keyword = "alcohol|drugs")
 #> # A tibble: 137 x 6
 #>    publisher.name   product   description   modified distribution csv_avail
@@ -51,26 +54,101 @@ fetch_catalog(keyword = "alcohol|drugs")
 #>  9 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
 #> 10 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
 #> # … with 127 more rows
+```
 
-# query API and dowload data for single product
+  - Querying API and downloading data for single product:
+
+<!-- end list -->
+
+``` r
 fetch_catalog("Centers for Disease Control and Prevention",
                                keyword = "built environment") %>% 
   fetch_csv()
 #> # A tibble: 1 x 6
-#>   publisher.name   product   description   modified downloadURL   data_file
-#>   <chr>            <chr>     <chr>         <chr>    <chr>         <list>   
-#> 1 Centers for Dis… CDC Nutr… "<p>This dat… 2018-09… https://data… <tibble …
+#>   publisher.name   product    description   modified downloadURL   data_tbl
+#>   <chr>            <chr>      <chr>         <chr>    <chr>         <list>  
+#> 1 Centers for Dis… CDC Nutri… "<p>This dat… 2018-09… https://data… <tibble…
+```
 
-# query API and dowload data for multiple data products
-# data files will be nested in a list-column 
+  - Querying API and downloading data for multiple data products. Data
+    will be nested in a list-column:
+
+<!-- end list -->
+
+``` r
+library(dplyr) # for table manipulation verbs
+
+# query catalog
+fetch_catalog(keyword = "alcohol")
+#> # A tibble: 123 x 6
+#>    publisher.name   product   description   modified distribution csv_avail
+#>    <chr>            <chr>     <chr>         <chr>    <list>       <lgl>    
+#>  1 Centers for Dis… Alzheime… "<p>2011-201… 2019-05… <df[,6] [4 … TRUE     
+#>  2 Centers for Dis… U.S. Chr… "<p>CDC's Di… 2018-07… <df[,6] [4 … TRUE     
+#>  3 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#>  4 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#>  5 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#>  6 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#>  7 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#>  8 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#>  9 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#> 10 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#> # … with 113 more rows
+
+# fetch data
 fetch_catalog(keyword = "alcohol") %>% 
-  slice(1:2) %>% 
+  slice(1:2) %>% # dplyr 
   fetch_csv()
 #> # A tibble: 2 x 6
-#>   publisher.name   product   description   modified downloadURL   data_file
-#>   <chr>            <chr>     <chr>         <chr>    <chr>         <list>   
-#> 1 Centers for Dis… Alzheime… "<p>2011-201… 2019-05… https://data… <tibble …
-#> 2 Centers for Dis… U.S. Chr… "<p>CDC's Di… 2018-07… https://data… <tibble …
+#>   publisher.name   product   description    modified downloadURL   data_tbl
+#>   <chr>            <chr>     <chr>          <chr>    <chr>         <list>  
+#> 1 Centers for Dis… Alzheime… "<p>2011-2017… 2019-05… https://data… <tibble…
+#> 2 Centers for Dis… U.S. Chr… "<p>CDC's Div… 2018-07… https://data… <tibble…
+```
+
+`fetch_csv()` wraps the [vroom](https://vroom.r-lib.org/) function,
+which helps quickly read relatively large delimited files:
+
+``` r
+# PRAMS data
+# CDC surveillance for reproductive health
+
+# query catalog for available products
+fetch_catalog(keyword = "reproductive health") %>% 
+  select(1:2)
+#> # A tibble: 14 x 2
+#>    publisher.name                              product                     
+#>    <chr>                                       <chr>                       
+#>  1 Centers for Disease Control and Prevention  U.S. Chronic Disease Indica…
+#>  2 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2011  
+#>  3 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2000  
+#>  4 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2001  
+#>  5 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2002  
+#>  6 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2003  
+#>  7 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2004  
+#>  8 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2005  
+#>  9 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2006  
+#> 10 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2007  
+#> 11 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2008  
+#> 12 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2009  
+#> 13 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2010  
+#> 14 Centers for Disease Control and Prevention… Assisted Reproductive Techn…
+
+# query, filter, and fetch
+prams <- fetch_catalog(keyword = "reproductive health") %>% 
+  mutate(year = readr::parse_number(product)) %>% 
+  filter(year > 2008) %>% 
+  arrange(year) %>% 
+  fetch_csv()
+
+prams %>% 
+  select(product, data_tbl)
+#> # A tibble: 3 x 2
+#>   product                    data_tbl               
+#>   <chr>                      <list>                 
+#> 1 CDC PRAMStat Data for 2009 <tibble [656,610 × 27]>
+#> 2 CDC PRAMStat Data for 2010 <tibble [558,054 × 27]>
+#> 3 CDC PRAMStat Data for 2011 <tibble [520,381 × 27]>
 ```
 
 ## Basic workflow
@@ -93,12 +171,12 @@ cdc_built_env
 #> 1 Centers for Dis… CDC Nutri… "<p>This dat… 2018-09… <df[,6] [4 … TRUE
 ```
 
-In this case, there is only one product available. To learn more, you
-can simply `pull` the description:
+In this case, there is only one product available. To learn more about
+the dataset, you can simply `pull` the description:
 
 ``` r
 cdc_built_env %>%
-  pull(description)
+  dplyr::pull(description)
 #> [1] "<p>This dataset contains policy data for 50 US states and DC from 2001 to 2017. Data include information related to state legislation and regulations on nutrition, physical activity, and obesity in settings such as early care and education centers, restaurants, schools, work places, and others. To identify individual bills, use the identifier ProvisionID.  A bill or citation may appear more than once because it could apply to multiple health or policy topics, settings, or states. As of Q 2 2016, data include only enacted legislation.</p>\n"
 ```
 
@@ -108,7 +186,7 @@ legislation.
 
 To download the data, we pass the catalog df to the `fetch_csv`
 function. Since there is only one dataset to download, we can `unnest`
-in the same pipe. *If the catalog has more than one product that you’ld
+in the same pipe. *If the catalog has more than one product that you’d
 like to keep, it is recommended to unnest each product separately.* If
 the catalog consists of several time points of the same dataset, you
 could unnest in one pipe, given all column names are the same.
@@ -116,7 +194,7 @@ could unnest in one pipe, given all column names are the same.
 ``` r
 data_raw <- cdc_built_env %>%
   fetch_csv() %>% #> 
-  tidyr::unnest(data_file)
+  tidyr::unnest(data_tbl)
 
 data_raw %>%
   glimpse()
@@ -142,7 +220,7 @@ data_raw %>%
 #> $ DataType       <chr> "Text", "Text", "Text", "Text", "Text", "Text", "…
 #> $ Comments       <chr> "(Abstract - \"Creates the Florida Shared-Use Non…
 #> $ EnactedDate    <chr> NA, NA, NA, NA, NA, "01/01/2007 12:00:00 AM", "01…
-#> $ EffectiveDate  <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+#> $ EffectiveDate  <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
 #> $ GeoLocation    <chr> "(28.932040377, -81.928960539)", "(42.827001032, …
 #> $ DisplayOrder   <dbl> 69, 21, 28, 33, 68, 3, 14, 10, 69, 28, 28, 28, 32…
 #> $ PolicyTypeID   <chr> "LEG", "LEG", "LEG", "LEG", "LEG", "LEG", "LEG", …
@@ -190,14 +268,13 @@ To pull all agencies cataloged, simply use `list_agencies` with the
 default argument:
 
 ``` r
-
 list_agencies() %>% 
   print(n=Inf)
 #> # A tibble: 31 x 1
 #>    publisher.name                                                          
 #>    <chr>                                                                   
-#>  1 Centers for Medicare & Medicaid Services                                
-#>  2 Centers for Disease Control and Prevention                              
+#>  1 Centers for Disease Control and Prevention                              
+#>  2 Centers for Medicare & Medicaid Services                                
 #>  3 Office of the National Coordinator for Health Information Technology    
 #>  4 U.S. Food and Drug Administration                                       
 #>  5 Substance Abuse & Mental Health Services Administration                 
@@ -234,7 +311,6 @@ accepts as argument a full *agency* name (in proper title case) which
 can be obtained with `list_agencies`.
 
 ``` r
-
 get_keywords("National Institutes of Health (NIH)")
 #> # A tibble: 78 x 2
 #>    publisher.name                      keyword                          
@@ -256,22 +332,21 @@ Conversely, this function can be run with the default value for a data
 frame of all keywords and agencies cataloged.
 
 ``` r
-
 get_keywords()
-#> # A tibble: 3,161 x 2
-#>    publisher.name                           keyword          
-#>    <chr>                                    <chr>            
-#>  1 Centers for Medicare & Medicaid Services directory        
-#>  2 Centers for Medicare & Medicaid Services medical equipment
-#>  3 Centers for Medicare & Medicaid Services supplier         
-#>  4 Centers for Medicare & Medicaid Services supplies         
-#>  5 Centers for Medicare & Medicaid Services care             
-#>  6 Centers for Medicare & Medicaid Services hospice          
-#>  7 Centers for Medicare & Medicaid Services hospice care     
-#>  8 Centers for Medicare & Medicaid Services list             
-#>  9 Centers for Medicare & Medicaid Services applications     
-#> 10 Centers for Medicare & Medicaid Services child enrollment 
-#> # … with 3,151 more rows
+#> # A tibble: 3,152 x 2
+#>    publisher.name                        keyword                           
+#>    <chr>                                 <chr>                             
+#>  1 Centers for Disease Control and Prev… antibody                          
+#>  2 Centers for Disease Control and Prev… chlamydia trachomatis             
+#>  3 Centers for Disease Control and Prev… division of parasitic diseases an…
+#>  4 Centers for Disease Control and Prev… latent class                      
+#>  5 Centers for Medicare & Medicaid Serv… amp                               
+#>  6 Centers for Medicare & Medicaid Serv… average manufacturer price        
+#>  7 Centers for Disease Control and Prev… fire safety                       
+#>  8 Centers for Disease Control and Prev… legislation                       
+#>  9 Centers for Disease Control and Prev… osh                               
+#> 10 Centers for Disease Control and Prev… policy                            
+#> # … with 3,142 more rows
 ```
 
 Additionally, keywords object can be loaded to the data viewer for
@@ -279,14 +354,13 @@ easier filtering, and text search by setting the `data_viewer` argument
 to `TRUE`:
 
 ``` r
-
 get_keywords("National Institutes of Health (NIH)",
              data_viewer = TRUE)
 ```
 
 #### Info
 
-Development of this package is partly supported by a research grant from
-the National Institute on Alcohol Abuse and Alcoholism - NIH Grant
+Development of this package was partly supported by a research grant
+from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant
 \#R34AA026745. This product is not endorsed nor certified by either
 healthdata.gov or NIH/NIAAA.

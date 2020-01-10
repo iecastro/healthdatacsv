@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -33,32 +35,78 @@ You can install the development version of **healthdatacsv** from [GitHub](https
 
 ``` {r, eval = FALSE}
 install.packages("remotes")
-
 remotes::install_github("iecastro/healthdatacsv")
 
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+```{r}
+library(healthdatacsv)
+```
+
+Basic examples which show you how to use **healthdatacsv**:  
+
+- Querying API based on keywords:  
 
 ```{r example}
-library(healthdatacsv)
-library(dplyr)
 
-# query API based on keywords
 fetch_catalog(keyword = "alcohol|drugs")
 
-# query API and dowload data for single product
+```
+
+- Querying API and downloading data for single product:  
+
+```{r}
+
 fetch_catalog("Centers for Disease Control and Prevention",
                                keyword = "built environment") %>% 
   fetch_csv()
 
-# query API and dowload data for multiple data products
-# data files will be nested in a list-column 
+```
+
+- Querying API and downloading data for multiple data products.  Data will be nested in a list-column:  
+
+```{r} 
+library(dplyr) # for table manipulation
+
+# query catalog
+fetch_catalog(keyword = "alcohol")
+
+# fetch data
 fetch_catalog(keyword = "alcohol") %>% 
-  slice(1:2) %>% 
+  slice(1:2) %>% # dplyr 
   fetch_csv()
+
+```
+
+`fetch_csv()` wraps the [vroom](https://vroom.r-lib.org/) function which helps quickly read relatively large delimited files:  
+
+```{r}
+# PRAMS data
+# CDC surveillance for reproductive health
+
+# query catalog for availabel products
+fetch_catalog(keyword = "reproductive health") %>% 
+  select(1:2)
+
+# query, filter, and fetch
+prams <- fetch_catalog(keyword = "reproductive health") %>% 
+  mutate(year = readr::parse_number(product)) %>% 
+  filter(year > 2008) %>% 
+  arrange(year) %>% 
+  fetch_csv()
+
+prams %>% 
+  select(product, data_tbl)
+
+```
+
+
+```{r}
+prams %>% 
+  slice(1) %>% 
+  unnest(cols = data_tbl)
 
 ```
 
@@ -151,6 +199,6 @@ get_keywords("National Institutes of Health (NIH)",
 
 #### Info
 
-Development of this package is partly supported by a research grant from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant #R34AA026745. This product is not endorsed nor certified by either healthdata.gov or NIH/NIAAA.
+Development of this package was partly supported by a research grant from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant #R34AA026745. This product is not endorsed nor certified by either healthdata.gov or NIH/NIAAA.
 
 

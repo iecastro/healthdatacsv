@@ -12,4 +12,5 @@
 #' @importFrom tibble tibble
 #' @importFrom rlang .data
 #' @importFrom utils View
+#' @importFrom vroom vroom
 NULL

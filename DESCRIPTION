@@ -22,7 +22,8 @@ Imports:
     rlang,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    vroom
 Suggests: 
     readr,
     testthat (>= 2.1.0)

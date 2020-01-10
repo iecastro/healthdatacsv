@@ -120,10 +120,10 @@ fetch_csv <- function(catalog) {
       .data$downloadURL
     ) %>%
     mutate(
-      data_file =
-        purrr::map(.data$downloadURL, ~ httr::GET(.) %>%
-                     httr::content())
-    )
+      data_tbl =
+        purrr::map(.data$downloadURL, ~ vroom::vroom(., delim = ",")
+                   )
+      )
 
   return(csv_list)
 }

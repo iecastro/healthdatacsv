@@ -88,7 +88,13 @@ get_keywords <- function(agency = NULL,
       filter(.data$publisher.name == agency)
   }
 
-  if (isTRUE(data_viewer)) {
+  if(nrow(keywords) == 0){
+    message(
+      "Your query did not return any results. Use list_agencies() to find agency names as cataloged in healthdata.gov"
+    )
+  }
+
+  if(isTRUE(data_viewer)) {
     View(keywords)
     return(keywords)
   } else {

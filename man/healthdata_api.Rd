@@ -4,7 +4,7 @@
 \alias{healthdata_api}
 \title{healdata.gov API call for data.json endpoint}
 \usage{
-healthdata_api(path = "data.json")
+healthdata_api(path)
 }
 \description{
 healdata.gov API call for data.json endpoint

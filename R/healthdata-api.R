@@ -25,7 +25,9 @@
 
 fetch_catalog <- function(agency = NULL,
                           keyword = NULL) {
-  parsed <- healthdata_api()
+  api_call <- healthdata_api("data.json")
+
+  parsed <- api_call$parsed
 
   parsed_dataset <- parsed$dataset
 
@@ -131,7 +133,7 @@ fetch_csv <- function(catalog) {
 #' healdata.gov API call for data.json endpoint
 #' @keywords internal
 
-healthdata_api <- function(path = "data.json") {
+healthdata_api <- function(path) {
   user <- user_agent("http://github.com/iecastro/healthdatacsv")
 
   data_url <- modify_url("http://www.healthdata.gov/api",
@@ -154,5 +156,8 @@ healthdata_api <- function(path = "data.json") {
     )
   }
 
-  return(parsed)
+  return(list(
+    "response" = response,
+    "parsed" = parsed)
+    )
 }

@@ -14,7 +14,9 @@
 #' @export
 
 list_agencies <- function(namecheck = NULL) {
-  parsed <- healthdata_api()
+  api_call <- healthdata_api("data.json")
+
+  parsed <- api_call$parsed
 
   parsed_dataset <- parsed$dataset
 
@@ -59,7 +61,9 @@ list_agencies <- function(namecheck = NULL) {
 
 get_keywords <- function(agency = NULL,
                          data_viewer = FALSE) {
-  parsed <- healthdata_api()
+  api_call <- healthdata_api("data.json")
+
+  parsed <- api_call$parsed
 
   parsed_dataset <- parsed$dataset
 

@@ -1,5 +1,5 @@
 Package: healthdatacsv
-Title: Access and download data from the healthdata.gov catalog
+Title: Access data in the healthdata.gov catalog
 Version: 0.0.1
 Authors@R: 
     person(given = "Ivan",
@@ -7,8 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "ivedcastr@gmail.com")
 Description: This package will make an API call to the
-    data.json endpoint of HealthData.gov and download data if available in
-    csv format.  Some helper functions available help users first query by
+    data.json endpoint of HealthData.gov and read data into R, if available in
+    csv format. Some helper functions are available to help users query by
     listed Agency and/or keywords.
 License: MIT + file LICENSE
 URL: https://github.com/iecastro/healthdatacsv

@@ -6,3 +6,4 @@ healthdatacsv*.tar.gz
 healthdatacsv*.tgz
 examples.R
 hdcsv.png
+inst/doc

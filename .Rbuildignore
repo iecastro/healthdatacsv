@@ -10,3 +10,5 @@
 ^hdcsv.png
 ^codecov\.yml$
 ^\.github$
+^doc$
+^Meta$

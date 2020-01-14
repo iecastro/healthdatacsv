@@ -186,6 +186,8 @@ get_keywords("National Institutes of Health (NIH)",
 
 #### Info
 
-Development of this package was partly supported by a research grant from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant #R34AA026745. This product is not endorsed nor certified by either healthdata.gov or NIH/NIAAA.
+Development of this package was partly supported by a research grant from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant #R34AA026745. This product is not endorsed nor certified by either healthdata.gov or NIH/NIAAA.  
+
+Please note that the 'healthdatacsv' project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.  
 
 

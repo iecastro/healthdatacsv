@@ -15,8 +15,6 @@ knitr::opts_chunk$set(
   warning = FALSE
 )
 
-devtools::load_all()
-
 ```
 
 

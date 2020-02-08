@@ -27,6 +27,7 @@ devtools::load_all()
 [![Travis build status](https://travis-ci.org/iecastro/healthdatacsv.svg?branch=master)](https://travis-ci.org/iecastro/healthdatacsv)
 [![Codecov test coverage](https://codecov.io/gh/iecastro/healthdatacsv/branch/master/graph/badge.svg)](https://codecov.io/gh/iecastro/healthdatacsv?branch=master)
 [![peer-review](https://badges.ropensci.org/358_status.svg)](https://github.com/ropensci/software-review/issues/358)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/iecastro/healthdatacsv?branch=master&svg=true)](https://ci.appveyor.com/project/iecastro/healthdatacsv)
 <!-- badges: end -->
 
 **healthdatacsv** allows users to query the [healthdata.gov API](https://healthdata.gov/node/25341) catalog and return tidy data frames. This package focuses on the data.json endpoint and will download datasets if available via file download, namely, in csv format.  

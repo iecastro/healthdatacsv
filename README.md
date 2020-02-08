@@ -12,6 +12,8 @@ status](https://travis-ci.org/iecastro/healthdatacsv.svg?branch=master)](https:/
 [![Codecov test
 coverage](https://codecov.io/gh/iecastro/healthdatacsv/branch/master/graph/badge.svg)](https://codecov.io/gh/iecastro/healthdatacsv?branch=master)
 [![peer-review](https://badges.ropensci.org/358_status.svg)](https://github.com/ropensci/software-review/issues/358)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/iecastro/healthdatacsv?branch=master&svg=true)](https://ci.appveyor.com/project/iecastro/healthdatacsv)
 <!-- badges: end -->
 
 **healthdatacsv** allows users to query the [healthdata.gov
@@ -46,16 +48,16 @@ fetch_catalog(keyword = "alcohol|drugs")
 #> # A tibble: 137 x 6
 #>    publisher.name   product   description   modified distribution csv_avail
 #>    <chr>            <chr>     <chr>         <chr>    <list>       <lgl>    
-#>  1 Centers for Dis… U.S. Chr… "<p>CDC's Di… 2018-07… <df[,6] [4 … TRUE     
-#>  2 Centers for Dis… Alzheime… "<p>2011-201… 2019-05… <df[,6] [4 … TRUE     
-#>  3 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  4 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  5 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  6 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  7 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  8 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  9 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#> 10 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#>  1 Centers for Dis… Alzheime… "<p>2011-201… 2020-02… <df[,5] [4 … TRUE     
+#>  2 Centers for Dis… U.S. Chr… "<p>CDC's Di… 2020-01… <df[,5] [4 … TRUE     
+#>  3 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  4 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  5 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  6 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  7 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  8 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  9 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#> 10 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
 #> # … with 127 more rows
 ```
 
@@ -86,16 +88,16 @@ fetch_catalog(keyword = "alcohol")
 #> # A tibble: 123 x 6
 #>    publisher.name   product   description   modified distribution csv_avail
 #>    <chr>            <chr>     <chr>         <chr>    <list>       <lgl>    
-#>  1 Centers for Dis… U.S. Chr… "<p>CDC's Di… 2018-07… <df[,6] [4 … TRUE     
-#>  2 Centers for Dis… Alzheime… "<p>2011-201… 2019-05… <df[,6] [4 … TRUE     
-#>  3 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  4 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  5 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  6 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  7 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  8 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#>  9 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
-#> 10 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,6] [4 … TRUE     
+#>  1 Centers for Dis… Alzheime… "<p>2011-201… 2020-02… <df[,5] [4 … TRUE     
+#>  2 Centers for Dis… U.S. Chr… "<p>CDC's Di… 2020-01… <df[,5] [4 … TRUE     
+#>  3 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  4 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  5 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  6 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  7 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  8 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>  9 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#> 10 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
 #> # … with 113 more rows
 
 # fetch data
@@ -105,8 +107,8 @@ fetch_catalog(keyword = "alcohol") %>%
 #> # A tibble: 2 x 6
 #>   publisher.name   product   description    modified downloadURL   data_tbl
 #>   <chr>            <chr>     <chr>          <chr>    <chr>         <list>  
-#> 1 Centers for Dis… U.S. Chr… "<p>CDC's Div… 2018-07… https://data… <tibble…
-#> 2 Centers for Dis… Alzheime… "<p>2011-2017… 2019-05… https://data… <tibble…
+#> 1 Centers for Dis… Alzheime… "<p>2011-2017… 2020-02… https://data… <tibble…
+#> 2 Centers for Dis… U.S. Chr… "<p>CDC's Div… 2020-01… https://data… <tibble…
 ```
 
 `fetch_csv()` wraps the [vroom](https://vroom.r-lib.org/) function,
@@ -171,7 +173,7 @@ cdc_built_env
 #> # A tibble: 1 x 6
 #>   publisher.name   product    description   modified distribution csv_avail
 #>   <chr>            <chr>      <chr>         <chr>    <list>       <lgl>    
-#> 1 Centers for Dis… CDC Nutri… "<p>This dat… 2018-09… <df[,6] [4 … TRUE
+#> 1 Centers for Dis… CDC Nutri… "<p>This dat… 2018-09… <df[,5] [4 … TRUE
 ```
 
 In this case, there is only one product available. To learn more about
@@ -276,8 +278,8 @@ list_agencies() %>%
 #> # A tibble: 31 x 1
 #>    publisher.name                                                          
 #>    <chr>                                                                   
-#>  1 Centers for Disease Control and Prevention                              
-#>  2 Centers for Medicare & Medicaid Services                                
+#>  1 Centers for Medicare & Medicaid Services                                
+#>  2 Centers for Disease Control and Prevention                              
 #>  3 Office of the National Coordinator for Health Information Technology    
 #>  4 U.S. Food and Drug Administration                                       
 #>  5 Substance Abuse & Mental Health Services Administration                 
@@ -337,18 +339,18 @@ frame of all keywords and agencies cataloged.
 ``` r
 get_keywords()
 #> # A tibble: 3,161 x 2
-#>    publisher.name                        keyword                           
-#>    <chr>                                 <chr>                             
-#>  1 Centers for Disease Control and Prev… antibody                          
-#>  2 Centers for Disease Control and Prev… chlamydia trachomatis             
-#>  3 Centers for Disease Control and Prev… division of parasitic diseases an…
-#>  4 Centers for Disease Control and Prev… latent class                      
-#>  5 Centers for Disease Control and Prev… 2020                              
-#>  6 Centers for Disease Control and Prev… botulism                          
-#>  7 Centers for Disease Control and Prev… foodborne                         
-#>  8 Centers for Disease Control and Prev… infant                            
-#>  9 Centers for Disease Control and Prev… nedss                             
-#> 10 Centers for Disease Control and Prev… netss                             
+#>    publisher.name                           keyword                   
+#>    <chr>                                    <chr>                     
+#>  1 Centers for Medicare & Medicaid Services directory                 
+#>  2 Centers for Medicare & Medicaid Services medical equipment         
+#>  3 Centers for Medicare & Medicaid Services supplier                  
+#>  4 Centers for Medicare & Medicaid Services supplies                  
+#>  5 Centers for Medicare & Medicaid Services applications              
+#>  6 Centers for Medicare & Medicaid Services child enrollment          
+#>  7 Centers for Medicare & Medicaid Services chip                      
+#>  8 Centers for Medicare & Medicaid Services eligibility determinations
+#>  9 Centers for Medicare & Medicaid Services enrollment                
+#> 10 Centers for Medicare & Medicaid Services medicaid                  
 #> # … with 3,151 more rows
 ```
 

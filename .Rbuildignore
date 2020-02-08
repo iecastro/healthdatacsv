@@ -12,3 +12,4 @@
 ^\.github$
 ^doc$
 ^Meta$
+^appveyor\.yml$

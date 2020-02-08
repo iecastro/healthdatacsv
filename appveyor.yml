@@ -22,7 +22,7 @@ environment:
 
 # Adapt as necessary starting from here
 
-matrix:
+  matrix:
   - R_VERSION: devel
     R_ARCH: x64
 
@@ -30,6 +30,9 @@ matrix:
     R_ARCH: x64
 
   - R_VERSION: patched
+
+matrix:
+  fast_finish: true
 
 build_script:
   - travis-tool.sh install_deps

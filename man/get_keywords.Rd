@@ -4,7 +4,7 @@
 \alias{get_keywords}
 \title{Helper function to extract keywords listed in the healthdata.gov API}
 \usage{
-get_keywords(agency = NULL, data_viewer = FALSE)
+get_keywords(agency = NULL)
 }
 \arguments{
 \item{agency}{enter full agency name in title case (results from

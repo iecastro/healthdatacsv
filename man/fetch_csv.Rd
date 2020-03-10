@@ -26,7 +26,7 @@ cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
 )
 
 nested_df_alc <- cdc_alc \%>\%
-  slice(1:2) \%>\% # pull Alzheimer's and Chronic Indicators datasets
+  dplyr::slice(1:2) \%>\% # pull Alzheimer's and Chronic Indicators datasets
   fetch_csv()
 }
 }

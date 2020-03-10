@@ -1,46 +1,45 @@
 #' Function to extract names of agencies cataloged in the healthdata.gov API
 #'
-#' @param namecheck enter partial name or initials of agency to search
-#'        catalog for string pattern. Use title case.
+#' @param agency enter partial name or initials of agency to search
+#'        catalog for string pattern.
 #'        Defaults to NULL and pulls all agencies cataloged in API
 #'
 #' @return a [tibble][tibble::tibble-package] of names
 #' @examples
 #' \dontrun{
 #' list_agencies()
-#' list_agencies("Institute")
-#' list_agencies("Substance Abuse")
+#' list_agencies("institute")
+#' list_agencies("substance abuse")
 #' }
 #' @export
 
-list_agencies <- function(namecheck = NULL) {
+list_agencies <- function(agency = NULL) {
+
   api_call <- healthdata_api("data.json")
 
   parsed <- api_call$parsed
 
   parsed_dataset <- parsed$dataset
 
-  if (is.null(namecheck)) {
-    pubs <- jsonlite::flatten(parsed_dataset) %>%
-      as_tibble() %>%
-      select(.data$publisher.name) %>%
-      distinct()
-  } else {
-    x <- namecheck
+  x <- agency
 
-    pubs <- jsonlite::flatten(parsed_dataset) %>%
-      as_tibble() %>%
-      select(.data$publisher.name) %>%
-      distinct() %>%
-      mutate(
-        partial_match =
-          stringr::str_detect(.data$publisher.name, x)
+  pubs <- jsonlite::flatten(parsed_dataset) %>%
+    as_tibble() %>%
+    select(publisher = .data$publisher.name) %>%
+    distinct()
+
+  if (!is.null(agency)){
+    pubs <- pubs %>%
+      mutate(partial_match =
+               stringr::str_detect(.data$publisher,
+                                   stringr::regex(x,
+                                                  ignore_case = TRUE))
       ) %>%
       filter(.data$partial_match == TRUE) %>%
       select(-.data$partial_match)
   }
 
-  return(pubs)
+  pubs
 }
 
 
@@ -59,33 +58,27 @@ list_agencies <- function(namecheck = NULL) {
 #' }
 #' @export
 
-get_keywords <- function(agency = NULL,
-                         data_viewer = FALSE) {
+get_keywords <- function(agency = NULL) {
+
   api_call <- healthdata_api("data.json")
 
   parsed <- api_call$parsed
 
   parsed_dataset <- parsed$dataset
 
-  if (is.null(agency)) {
-    keywords <- jsonlite::flatten(parsed_dataset) %>%
-      as_tibble() %>%
-      select(
-        .data$publisher.name,
-        .data$keyword
-      ) %>%
-      tidyr::unnest(cols = c(.data$keyword)) %>%
-      distinct()
-  } else {
-    keywords <- jsonlite::flatten(parsed_dataset) %>%
-      as_tibble() %>%
-      select(
-        .data$publisher.name,
-        .data$keyword
-      ) %>%
-      tidyr::unnest(cols = c(.data$keyword)) %>%
-      distinct() %>%
-      filter(.data$publisher.name == agency)
+  keywords <- jsonlite::flatten(parsed_dataset) %>%
+    as_tibble() %>%
+    select(
+      publisher = .data$publisher.name,
+      .data$keyword
+    ) %>%
+    tidyr::unnest(cols = c(.data$keyword)) %>%
+    distinct()
+
+  if (!is.null(agency)) {
+
+    keywords <- keywords %>%
+      filter(.data$publisher == agency)
   }
 
   if(nrow(keywords) == 0){
@@ -98,10 +91,5 @@ get_keywords <- function(agency = NULL,
     )
   }
 
-  if(isTRUE(data_viewer)) {
-    View(keywords)
-    return(keywords)
-  } else {
-    return(keywords)
-  }
+  keywords
 }

@@ -25,68 +25,52 @@
 
 fetch_catalog <- function(agency = NULL,
                           keyword = NULL) {
+
   api_call <- healthdata_api("data.json")
 
   parsed <- api_call$parsed
 
   parsed_dataset <- parsed$dataset
 
-  if (is.null(agency)) {
-    catalog <-
-      jsonlite::flatten(parsed_dataset) %>%
-      as_tibble() %>%
-      select(
-        .data$publisher.name,
-        product = .data$title,
-        .data$description,
-        .data$modified,
-        .data$distribution,
-        .data$keyword
-      ) %>%
-      mutate(
-        csv_avail =
-          suppressWarnings(stringr::str_detect(.data$distribution, "csv"))
-      )
-  } else {
-    catalog <-
-      jsonlite::flatten(parsed_dataset) %>%
-      as_tibble() %>%
-      select(
-        .data$publisher.name,
-        product = .data$title,
-        .data$description,
-        .data$modified,
-        .data$distribution,
-        .data$keyword
-      ) %>%
-      filter(.data$publisher.name == agency) %>%
-      mutate(
-        csv_avail =
-          suppressWarnings(stringr::str_detect(.data$distribution, "csv"))
-      )
+  x <- keyword
+
+  catalog <-
+    jsonlite::flatten(parsed_dataset) %>%
+    as_tibble() %>%
+    select(
+      publisher = .data$publisher.name,
+      product = .data$title,
+      .data$description,
+      .data$modified,
+      .data$distribution,
+      .data$keyword
+    ) %>%
+    mutate(
+      csv_avail =
+        suppressWarnings(stringr::str_detect(.data$distribution, "csv"))
+    )
+
+  if (!is.null(agency)) {
+    catalog <- catalog %>%
+      filter(.data$publisher == agency)
   }
 
   if (is.null(keyword)) {
-    return(catalog %>%
-        select(-.data$keyword)
-    )
+    catalog %>%
+      select(-.data$keyword)
   } else {
-    x <- keyword
-
-    return(catalog %>%
-        mutate(
-          keyword = purrr::map(
-            keyword,
-            stringr::str_detect, x
-          ),
-          keyword = purrr::map_lgl(keyword, any)
-        ) %>%
-        filter(.data$keyword == TRUE) %>%
-        select(-.data$keyword)
-    )
+    catalog %>%
+      mutate(
+        keyword = purrr::map(
+          keyword,
+          stringr::str_detect, x
+        ),
+        keyword = purrr::map_lgl(keyword, any)
+      ) %>%
+      filter(.data$keyword == TRUE) %>%
+      select(-.data$keyword)
   }
 }
-
 
 
 #' Function to fetch data from the healthdata.gov API
@@ -103,19 +87,29 @@ fetch_catalog <- function(agency = NULL,
 #' )
 #'
 #' nested_df_alc <- cdc_alc %>%
-#'   slice(1:2) %>% # pull Alzheimer's and Chronic Indicators datasets
+#'   dplyr::slice(1:2) %>% # pull Alzheimer's and Chronic Indicators datasets
 #'   fetch_csv()
 #' }
 #' @export
 
 fetch_csv <- function(catalog) {
-  csv_list <- catalog %>%
-    tidyr::unnest(cols = c(.data$distribution)) %>%
+  df <- catalog %>%
+    filter(.data$csv_avail == TRUE)
+
+  if (nrow(df) == 0){
+    stop(
+      paste0("It seems there was nothing to download for you. ",
+             "Make sure the product you're trying to get ",
+             "has a download option in CSV format by checking ",
+             "that column `csv_avail` is true in the catalog supplied.")
+    )
+  }
+
+  csv_list <- tidyr::unnest(cols = c(.data$distribution)) %>%
     mutate(is_csv = stringr::str_detect(.data$downloadURL, "csv")) %>%
-    filter(.data$csv_avail == TRUE &
-             .data$is_csv == TRUE) %>%
+    filter(.data$is_csv == TRUE) %>%
     select(
-      .data$publisher.name,
+      .data$publisher,
       .data$product,
       .data$description,
       .data$modified,
@@ -124,10 +118,10 @@ fetch_csv <- function(catalog) {
     mutate(
       data_tbl =
         purrr::map(.data$downloadURL, ~ vroom::vroom(., delim = ",")
-                   )
-      )
+        )
+    )
 
-  return(csv_list)
+  csv_list
 }
 
 #' healdata.gov API call for data.json endpoint
@@ -142,7 +136,8 @@ healthdata_api <- function(path) {
 
   response <- GET(data_url, user)
 
-  parsed <- jsonlite::fromJSON(httr::content(response, "text"))
+  parsed <- jsonlite::fromJSON(httr::content(response, "text",
+                                             encoding = "UTF-8"))
 
   if (http_error(response)) {
     stop(

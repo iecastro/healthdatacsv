@@ -4,11 +4,11 @@
 \alias{list_agencies}
 \title{Function to extract names of agencies cataloged in the healthdata.gov API}
 \usage{
-list_agencies(namecheck = NULL)
+list_agencies(agency = NULL)
 }
 \arguments{
-\item{namecheck}{enter partial name or initials of agency to search
-catalog for string pattern. Use title case.
+\item{agency}{enter partial name or initials of agency to search
+catalog for string pattern.
 Defaults to NULL and pulls all agencies cataloged in API}
 }
 \value{
@@ -20,7 +20,7 @@ Function to extract names of agencies cataloged in the healthdata.gov API
 \examples{
 \dontrun{
 list_agencies()
-list_agencies("Institute")
-list_agencies("Substance Abuse")
+list_agencies("institute")
+list_agencies("substance abuse")
 }
 }

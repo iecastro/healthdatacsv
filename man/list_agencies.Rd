@@ -12,7 +12,7 @@ catalog for string pattern.
 Defaults to NULL and pulls all agencies cataloged in API}
 }
 \value{
-a [tibble][tibble::tibble-package] of names
+a \code{\link[tibble:tibble]{tibble}} of names
 }
 \description{
 Function to extract names of agencies cataloged in the healthdata.gov API

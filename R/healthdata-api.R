@@ -11,7 +11,7 @@
 #'        The keyword argument uses regular expression to detect presence of
 #'        pattern in a string. Function get_keywords() can be used for a list
 #'        of exact keywords available in API. Defaults to NULL.
-#' @return a [tibble][tibble::tibble-package] with descriptive metadata of
+#' @return a [`tibble`][tibble::tibble()] with descriptive metadata of
 #'         the available catalog including a nested list-column of the
 #'         data distribution.
 #' @examples
@@ -78,7 +78,7 @@ fetch_catalog <- function(agency = NULL,
 #'
 #' @param catalog this argument requires a catalog (tibble) created
 #'        with fetch_catalog()
-#' @return a [tibble][tibble::tibble-package] with descriptive metadata
+#' @return a [`tibble`][tibble::tibble()] with descriptive metadata
 #'         of a data product and a list-column of the available dataset.
 #' @examples
 #' \dontrun{
@@ -105,7 +105,8 @@ fetch_csv <- function(catalog) {
     )
   }
 
-  csv_list <- tidyr::unnest(cols = c(.data$distribution)) %>%
+  csv_list <- df %>%
+    tidyr::unnest(cols = c(.data$distribution)) %>%
     mutate(is_csv = stringr::str_detect(.data$downloadURL, "csv")) %>%
     filter(.data$is_csv == TRUE) %>%
     select(
@@ -125,7 +126,7 @@ fetch_csv <- function(catalog) {
 }
 
 #' healdata.gov API call for data.json endpoint
-#' @keywords internal
+#' @noRd
 
 healthdata_api <- function(path) {
   user <- user_agent("http://github.com/iecastro/healthdatacsv")

@@ -76,7 +76,7 @@ fetch_catalog(keyword = "alcohol")
 
 # fetch data
 fetch_catalog(keyword = "alcohol") %>% 
-  slice(1:2) %>% # dplyr 
+  dplyr::slice(1) %>% # dplyr 
   fetch_csv()
 
 ```
@@ -86,15 +86,10 @@ fetch_catalog(keyword = "alcohol") %>%
 ```{r}
 # PRAMS data
 # CDC surveillance for reproductive health
-
-# query catalog for available products
-fetch_catalog(keyword = "reproductive health") %>% 
-  select(1:2)
-
 # query, filter, and fetch
 prams <- fetch_catalog(keyword = "reproductive health") %>% 
   mutate(year = readr::parse_number(product)) %>% 
-  filter(year > 2008) %>% 
+  filter(year >= 2010) %>% 
   arrange(year) %>% 
   fetch_csv()
 
@@ -106,9 +101,7 @@ prams %>%
 
 ## Basic workflow
 
-**healthdatacsv** is pipe friendly, so it's easy to integrate into a tidy workflow. For example, say you're interested in searching CDC datasets related to the built environment.  
-
-Let's fetch the catalog of available data products:
+Say you're interested in searching for CDC datasets related to the built environment.  You can use **healthdatacsv** to fetch the catalog of available data products:
 
 ```{r}
 cdc_built_env <- fetch_catalog("Centers for Disease Control and Prevention",
@@ -128,7 +121,7 @@ cdc_built_env %>%
 
 This dataset relates to state legislation on nutrition, physical activity, and obesity during 2001-2017.  Data only includes enacted legislation.
 
-To download the data, we pass the catalog df to the `fetch_csv` function.  Since there is only one dataset to download, we can `unnest` in the same pipe.  *If the catalog has more than one product that you'd like to keep, it is recommended to unnest each product separately.* If the catalog consists of several time points of the same dataset, you could unnest in one pipe, given all column names are the same. 
+To download the data, we pass the catalog object to the `fetch_csv` function.  Since there is only one dataset to download, we can `unnest` in the same pipe.  *If the catalog has more than one product that you'd like to keep, it is recommended to unnest each product separately.* If the catalog consists of several time points of the same dataset, you could unnest in one pipe, given all column names are the same. 
 
 
 ```{r}
@@ -136,9 +129,7 @@ data_raw <- cdc_built_env %>%
   fetch_csv() %>% #> 
   tidyr::unnest(data_tbl)
 
-data_raw %>%
-  glimpse()
-
+data_raw
 ```
 
 
@@ -157,9 +148,7 @@ list_agencies("Institute|Drug")
 The resulting dataframe will depend on matches to the string supplied. To pull all agencies cataloged, simply use `list_agencies` with the default argument:
 
 ```{r}
-list_agencies() %>% 
-  print(n=Inf)
-
+list_agencies()
 ```
 
 `get_keywords()` will extract all keywords cataloged. The function accepts as argument a full *agency* name (in proper title case) which can be obtained with `list_agencies`.  
@@ -169,26 +158,11 @@ get_keywords("National Institutes of Health (NIH)")
 
 ```
 
-
-Conversely, this function can be run with the default value for a data frame of all keywords and agencies cataloged.
-
-```{r}
-get_keywords()
-
-```
-
-Additionally, keywords object can be loaded to the data viewer for easier filtering, and text search by setting the `data_viewer` argument to `TRUE`:
-
-```{r, eval = FALSE}
-get_keywords("National Institutes of Health (NIH)",
-             data_viewer = TRUE)
-
-```
-
+Conversely, this function can be run with no argument for a data frame of all keywords and agencies cataloged.
 
 #### Info
 
-Development of this package was partly supported by a research grant from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant #R34AA026745. This product is not endorsed nor certified by either healthdata.gov or NIH/NIAAA.  
+Development of this package partly supported by a research grant from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant #R34AA026745. This product is not endorsed nor certified by either healthdata.gov or NIH/NIAAA.  
 
 Please note that the 'healthdatacsv' project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.  
 

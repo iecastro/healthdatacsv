@@ -12,8 +12,8 @@ fetch_csv(catalog)
 with fetch_catalog()}
 }
 \value{
-a [tibble][tibble::tibble-package] with descriptive metadata
-        of a data product and a list-column of the available dataset.
+a \code{\link[tibble:tibble]{tibble}} with descriptive metadata
+of a data product and a list-column of the available dataset.
 }
 \description{
 Function to fetch data from the healthdata.gov API

@@ -21,9 +21,9 @@ pattern in a string. Function get_keywords() can be used for a list
 of exact keywords available in API. Defaults to NULL.}
 }
 \value{
-a [tibble][tibble::tibble-package] with descriptive metadata of
-        the available catalog including a nested list-column of the
-        data distribution.
+a \code{\link[tibble:tibble]{tibble}} with descriptive metadata of
+the available catalog including a nested list-column of the
+data distribution.
 }
 \description{
 Function to fetch the current available catalog from healthdata.gov

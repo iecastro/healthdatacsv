@@ -10,12 +10,10 @@ get_keywords(agency = NULL)
 \item{agency}{enter full agency name in title case (results from
 list_agencies()) to pull keywords tagged in the listed
 agency's products. Defaults to NULL and pulls all keywords cataloged}
-
-\item{data_viewer}{if TRUE, keywords are loaded to the data viewer}
 }
 \value{
-a [tibble][tibble::tibble-package] with publisher (agency)
-        name(s) and respective keywords
+a \code{\link[tibble:tibble]{tibble}} with publisher (agency)
+name(s) and respective keywords
 }
 \description{
 Helper function to extract keywords listed in the healthdata.gov API

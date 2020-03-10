@@ -45,20 +45,20 @@ Basic examples which show you how to use **healthdatacsv**:
 
 ``` r
 fetch_catalog(keyword = "alcohol|drugs")
-#> # A tibble: 137 x 6
-#>    publisher.name   product   description   modified distribution csv_avail
-#>    <chr>            <chr>     <chr>         <chr>    <list>       <lgl>    
-#>  1 Centers for Dis… Alzheime… "<p>2011-201… 2020-02… <df[,5] [4 … TRUE     
-#>  2 Centers for Dis… U.S. Chr… "<p>CDC's Di… 2020-01… <df[,5] [4 … TRUE     
-#>  3 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  4 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  5 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  6 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  7 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  8 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  9 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#> 10 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#> # … with 127 more rows
+#> # A tibble: 134 x 6
+#>    publisher    product    description      modified distribution csv_avail
+#>    <chr>        <chr>      <chr>            <chr>    <list>       <lgl>    
+#>  1 Centers for… Alzheimer… "<p>2011-2017. … 2020-02… <df[,5] [4 … TRUE     
+#>  2 Centers for… U.S. Chro… "<p>CDC's Divis… 2020-01… <df[,5] [4 … TRUE     
+#>  3 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  4 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  5 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  6 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  7 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  8 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  9 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#> 10 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#> # … with 124 more rows
 ```
 
   - Querying API and downloading data for single product:
@@ -70,9 +70,9 @@ fetch_catalog("Centers for Disease Control and Prevention",
                                keyword = "built environment") %>% 
   fetch_csv()
 #> # A tibble: 1 x 6
-#>   publisher.name   product    description   modified downloadURL   data_tbl
-#>   <chr>            <chr>      <chr>         <chr>    <chr>         <list>  
-#> 1 Centers for Dis… CDC Nutri… "<p>This dat… 2018-09… https://data… <tibble…
+#>   publisher    product     description     modified downloadURL    data_tbl
+#>   <chr>        <chr>       <chr>           <chr>    <chr>          <list>  
+#> 1 Centers for… CDC Nutrit… "<p>This datas… 2018-09… https://data.… <tibble…
 ```
 
   - Querying API and downloading data for multiple data products. Data
@@ -86,29 +86,28 @@ library(dplyr) # for table manipulation verbs
 # query catalog
 fetch_catalog(keyword = "alcohol")
 #> # A tibble: 123 x 6
-#>    publisher.name   product   description   modified distribution csv_avail
-#>    <chr>            <chr>     <chr>         <chr>    <list>       <lgl>    
-#>  1 Centers for Dis… Alzheime… "<p>2011-201… 2020-02… <df[,5] [4 … TRUE     
-#>  2 Centers for Dis… U.S. Chr… "<p>CDC's Di… 2020-01… <df[,5] [4 … TRUE     
-#>  3 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  4 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  5 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  6 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  7 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  8 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#>  9 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
-#> 10 Centers for Dis… CDC PRAM… "<ol start=\… 2018-07… <df[,5] [4 … TRUE     
+#>    publisher    product    description      modified distribution csv_avail
+#>    <chr>        <chr>      <chr>            <chr>    <list>       <lgl>    
+#>  1 Centers for… Alzheimer… "<p>2011-2017. … 2020-02… <df[,5] [4 … TRUE     
+#>  2 Centers for… U.S. Chro… "<p>CDC's Divis… 2020-01… <df[,5] [4 … TRUE     
+#>  3 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  4 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  5 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  6 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  7 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  8 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#>  9 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
+#> 10 Centers for… CDC PRAMS… "<ol start=\"20… 2018-07… <df[,5] [4 … TRUE     
 #> # … with 113 more rows
 
 # fetch data
 fetch_catalog(keyword = "alcohol") %>% 
-  slice(1:2) %>% # dplyr 
+  dplyr::slice(1) %>% # dplyr 
   fetch_csv()
-#> # A tibble: 2 x 6
-#>   publisher.name   product   description    modified downloadURL   data_tbl
-#>   <chr>            <chr>     <chr>          <chr>    <chr>         <list>  
-#> 1 Centers for Dis… Alzheime… "<p>2011-2017… 2020-02… https://data… <tibble…
-#> 2 Centers for Dis… U.S. Chr… "<p>CDC's Div… 2020-01… https://data… <tibble…
+#> # A tibble: 1 x 6
+#>   publisher    product    description    modified downloadURL     data_tbl 
+#>   <chr>        <chr>      <chr>          <chr>    <chr>           <list>   
+#> 1 Centers for… Alzheimer… "<p>2011-2017… 2020-02… https://data.c… <tibble …
 ```
 
 `fetch_csv()` wraps the [vroom](https://vroom.r-lib.org/) function,
@@ -117,52 +116,27 @@ which helps quickly read relatively large delimited files:
 ``` r
 # PRAMS data
 # CDC surveillance for reproductive health
-
-# query catalog for available products
-fetch_catalog(keyword = "reproductive health") %>% 
-  select(1:2)
-#> # A tibble: 14 x 2
-#>    publisher.name                              product                     
-#>    <chr>                                       <chr>                       
-#>  1 Centers for Disease Control and Prevention  U.S. Chronic Disease Indica…
-#>  2 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2011  
-#>  3 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2000  
-#>  4 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2001  
-#>  5 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2002  
-#>  6 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2003  
-#>  7 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2004  
-#>  8 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2005  
-#>  9 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2006  
-#> 10 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2007  
-#> 11 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2008  
-#> 12 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2009  
-#> 13 Centers for Disease Control and Prevention  CDC PRAMStat Data for 2010  
-#> 14 Centers for Disease Control and Prevention… Assisted Reproductive Techn…
-
 # query, filter, and fetch
 prams <- fetch_catalog(keyword = "reproductive health") %>% 
   mutate(year = readr::parse_number(product)) %>% 
-  filter(year > 2008) %>% 
+  filter(year >= 2010) %>% 
   arrange(year) %>% 
   fetch_csv()
 
 prams %>% 
   select(product, data_tbl)
-#> # A tibble: 3 x 2
+#> # A tibble: 2 x 2
 #>   product                    data_tbl               
 #>   <chr>                      <list>                 
-#> 1 CDC PRAMStat Data for 2009 <tibble [656,610 × 27]>
-#> 2 CDC PRAMStat Data for 2010 <tibble [558,054 × 27]>
-#> 3 CDC PRAMStat Data for 2011 <tibble [520,381 × 27]>
+#> 1 CDC PRAMStat Data for 2010 <tibble [558,054 × 27]>
+#> 2 CDC PRAMStat Data for 2011 <tibble [520,381 × 27]>
 ```
 
 ## Basic workflow
 
-**healthdatacsv** is pipe friendly, so it’s easy to integrate into a
-tidy workflow. For example, say you’re interested in searching CDC
-datasets related to the built environment.
-
-Let’s fetch the catalog of available data
+Say you’re interested in searching for CDC datasets related to the built
+environment. You can use **healthdatacsv** to fetch the catalog of
+available data
 products:
 
 ``` r
@@ -171,9 +145,9 @@ cdc_built_env <- fetch_catalog("Centers for Disease Control and Prevention",
 
 cdc_built_env
 #> # A tibble: 1 x 6
-#>   publisher.name   product    description   modified distribution csv_avail
-#>   <chr>            <chr>      <chr>         <chr>    <list>       <lgl>    
-#> 1 Centers for Dis… CDC Nutri… "<p>This dat… 2018-09… <df[,5] [4 … TRUE
+#>   publisher    product      description     modified distribution csv_avail
+#>   <chr>        <chr>        <chr>           <chr>    <list>       <lgl>    
+#> 1 Centers for… CDC Nutriti… "<p>This datas… 2018-09… <df[,5] [4 … TRUE
 ```
 
 In this case, there is only one product available. To learn more about
@@ -189,7 +163,7 @@ This dataset relates to state legislation on nutrition, physical
 activity, and obesity during 2001-2017. Data only includes enacted
 legislation.
 
-To download the data, we pass the catalog df to the `fetch_csv`
+To download the data, we pass the catalog object to the `fetch_csv`
 function. Since there is only one dataset to download, we can `unnest`
 in the same pipe. *If the catalog has more than one product that you’d
 like to keep, it is recommended to unnest each product separately.* If
@@ -201,38 +175,27 @@ data_raw <- cdc_built_env %>%
   fetch_csv() %>% #> 
   tidyr::unnest(data_tbl)
 
-data_raw %>%
-  glimpse()
-#> Observations: 33,182
-#> Variables: 28
-#> $ publisher.name <chr> "Centers for Disease Control and Prevention", "Ce…
-#> $ product        <chr> "CDC Nutrition, Physical Activity, and Obesity - …
-#> $ description    <chr> "<p>This dataset contains policy data for 50 US s…
-#> $ modified       <chr> "2018-09-25", "2018-09-25", "2018-09-25", "2018-0…
-#> $ downloadURL    <chr> "https://data.cdc.gov/api/views/nxst-x9p4/rows.cs…
-#> $ Year           <dbl> 2011, 2011, 2011, 2010, 2015, 2007, 2012, 2010, 2…
-#> $ Quarter        <dbl> 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-#> $ LocationAbbr   <chr> "TN", "TN", "FL", "DC", "AL", "OK", "MI", "CO", "…
-#> $ LocationDesc   <chr> "Tennessee", "Tennessee", "Florida", "District of…
-#> $ HealthTopic    <chr> "Nutrition", "Obesity", "Obesity", "Nutrition", "…
-#> $ PolicyTopic    <chr> "Media Campaigns", "Food Restrictions", "Incentiv…
-#> $ DataSource     <chr> "DNPAO", "DNPAO", "DNPAO", "DNPAO", "DNPAO", "DNP…
-#> $ Setting        <chr> "School/After School", "Restaurant/Retail", "Comm…
-#> $ Title          <chr> "Tort Liability and Reform", "Public Funds and Fi…
-#> $ Status         <chr> "Enacted", "Dead", "Dead", "Enacted", "Enacted", …
-#> $ Citation       <chr> "H1151", "H1385", "H455", "R1136", "SB260", "H283…
-#> $ StatusAltValue <dbl> 1, 3, 3, 1, 1, 1, 1, 1, 3, 3, 1, 1, 3, 3, 3, 1, 3…
-#> $ DataType       <chr> "Text", "Text", "Text", "Text", "Text", "Text", "…
-#> $ Comments       <chr> "(Abstract - Removes a statutory reference to cer…
-#> $ EnactedDate    <chr> "01/01/2011 12:00:00 AM", NA, NA, "01/01/2010 12:…
-#> $ EffectiveDate  <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-#> $ GeoLocation    <chr> "(35.68094058, -85.774490914)", "(35.68094058, -8…
-#> $ DisplayOrder   <dbl> 19, 35, 38, 1, 26, 3, 26, 1, 21, 23, 1, 2, 2, 15,…
-#> $ PolicyTypeID   <chr> "LEG", "LEG", "LEG", "LEG", "LEG", "LEG", "LEG", …
-#> $ HealthTopicID  <chr> "001NUT", "002OB", "002OB", "001NUT", "001NUT", "…
-#> $ PolicyTopicID  <chr> "031MDC", "020FOR", "029INC", "001AHF", "053INP",…
-#> $ SettingID      <chr> "004SAS", "006RES", "002COM", "002COM", "002COM",…
-#> $ ProvisionID    <dbl> 4565, 4567, 3683, 2502, 6898, 1956, 5624, 2461, 1…
+data_raw
+#> # A tibble: 33,182 x 28
+#>    publisher product description modified downloadURL  Year Quarter
+#>    <chr>     <chr>   <chr>       <chr>    <chr>       <dbl>   <dbl>
+#>  1 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2011       1
+#>  2 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2011       1
+#>  3 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2011       1
+#>  4 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2010       1
+#>  5 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2015       2
+#>  6 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2007       1
+#>  7 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2012       1
+#>  8 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2010       1
+#>  9 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2010       1
+#> 10 Centers … CDC Nu… "<p>This d… 2018-09… https://da…  2011       1
+#> # … with 33,172 more rows, and 21 more variables: LocationAbbr <chr>,
+#> #   LocationDesc <chr>, HealthTopic <chr>, PolicyTopic <chr>,
+#> #   DataSource <chr>, Setting <chr>, Title <chr>, Status <chr>,
+#> #   Citation <chr>, StatusAltValue <dbl>, DataType <chr>, Comments <chr>,
+#> #   EnactedDate <chr>, EffectiveDate <chr>, GeoLocation <chr>,
+#> #   DisplayOrder <dbl>, PolicyTypeID <chr>, HealthTopicID <chr>,
+#> #   PolicyTopicID <chr>, SettingID <chr>, ProvisionID <dbl>
 ```
 
 ### Some helper functions
@@ -248,7 +211,7 @@ to detect string matches.
 
 list_agencies("NIH|CDC|FDA")
 #> # A tibble: 4 x 1
-#>   publisher.name                                                           
+#>   publisher                                                                
 #>   <chr>                                                                    
 #> 1 National Institutes of Health (NIH)                                      
 #> 2 National Institutes of Health (NIH), Department of Health & Human Servic…
@@ -257,7 +220,7 @@ list_agencies("NIH|CDC|FDA")
 
 list_agencies("Institute|Drug")
 #> # A tibble: 7 x 1
-#>   publisher.name                                                           
+#>   publisher                                                                
 #>   <chr>                                                                    
 #> 1 U.S. Food and Drug Administration                                        
 #> 2 National Institutes of Health (NIH)                                      
@@ -273,42 +236,21 @@ To pull all agencies cataloged, simply use `list_agencies` with the
 default argument:
 
 ``` r
-list_agencies() %>% 
-  print(n=Inf)
-#> # A tibble: 31 x 1
-#>    publisher.name                                                          
+list_agencies()
+#> # A tibble: 32 x 1
+#>    publisher                                                               
 #>    <chr>                                                                   
-#>  1 Centers for Medicare & Medicaid Services                                
-#>  2 Centers for Disease Control and Prevention                              
-#>  3 Office of the National Coordinator for Health Information Technology    
-#>  4 U.S. Food and Drug Administration                                       
-#>  5 Substance Abuse & Mental Health Services Administration                 
-#>  6 Agency for Healthcare Research and Quality, Department of Health & Huma…
-#>  7 Health Resources and Services Administration                            
-#>  8 National Library of Medicine (NLM)                                      
-#>  9 National Institutes of Health (NIH)                                     
-#> 10 Department of Health & Human Services                                   
-#> 11 National Institute of Environmental Health Sciences (NIEHS)             
-#> 12 Office of the National Coordinator for Health Information Technology, D…
-#> 13 Administration for Children and Families                                
-#> 14 Centers for Medicare & Medicaid Services, Department of Health & Human …
-#> 15 Centers for Disease Control and Prevention, Department of Health & Huma…
-#> 16 Assistant Secretary for Planning & Evaluation, Department of Health & H…
-#> 17 U.S. Food and Drug Administration, Department of Health & Human Services
-#> 18 Office of Medicare Hearings and Appeals                                 
-#> 19 Substance Abuse & Mental Health Services Administration, Department of …
-#> 20 Administration for Children and Families, Department of Health & Human …
-#> 21 National Institutes of Health (NIH), Department of Health & Human Servi…
-#> 22 Indian Health Service                                                   
-#> 23 National Institute on Drug Abuse (NIDA), National Institutes of Health …
-#> 24 Office of Inspector General, Department of Health & Human Services      
-#> 25 Office of Inspector General                                             
-#> 26 Administration for Community Living                                     
-#> 27 Health Resources and Services Administration, Department of Health & Hu…
-#> 28 Administration for Community Living, Department of Health & Human Servi…
-#> 29 National Cancer Institute (NCI), National Institutes of Health (NIH)    
-#> 30 Department of Health & Human Services, Agency for Healthcare Research a…
-#> 31 Departmental Appeals Board
+#>  1 Centers for Disease Control and Prevention                              
+#>  2 Centers for Medicare & Medicaid Services                                
+#>  3 Centers for Medicare & Medicaid Services (CMS)                          
+#>  4 Office of the National Coordinator for Health Information Technology    
+#>  5 U.S. Food and Drug Administration                                       
+#>  6 Substance Abuse & Mental Health Services Administration                 
+#>  7 Agency for Healthcare Research and Quality, Department of Health & Huma…
+#>  8 Health Resources and Services Administration                            
+#>  9 National Library of Medicine (NLM)                                      
+#> 10 National Institutes of Health (NIH)                                     
+#> # … with 22 more rows
 ```
 
 `get_keywords()` will extract all keywords cataloged. The function
@@ -318,7 +260,7 @@ can be obtained with `list_agencies`.
 ``` r
 get_keywords("National Institutes of Health (NIH)")
 #> # A tibble: 78 x 2
-#>    publisher.name                      keyword                          
+#>    publisher                           keyword                          
 #>    <chr>                               <chr>                            
 #>  1 National Institutes of Health (NIH) national-institutes-of-health-nih
 #>  2 National Institutes of Health (NIH) parkinsons                       
@@ -333,40 +275,13 @@ get_keywords("National Institutes of Health (NIH)")
 #> # … with 68 more rows
 ```
 
-Conversely, this function can be run with the default value for a data
-frame of all keywords and agencies cataloged.
-
-``` r
-get_keywords()
-#> # A tibble: 3,161 x 2
-#>    publisher.name                           keyword                   
-#>    <chr>                                    <chr>                     
-#>  1 Centers for Medicare & Medicaid Services directory                 
-#>  2 Centers for Medicare & Medicaid Services medical equipment         
-#>  3 Centers for Medicare & Medicaid Services supplier                  
-#>  4 Centers for Medicare & Medicaid Services supplies                  
-#>  5 Centers for Medicare & Medicaid Services applications              
-#>  6 Centers for Medicare & Medicaid Services child enrollment          
-#>  7 Centers for Medicare & Medicaid Services chip                      
-#>  8 Centers for Medicare & Medicaid Services eligibility determinations
-#>  9 Centers for Medicare & Medicaid Services enrollment                
-#> 10 Centers for Medicare & Medicaid Services medicaid                  
-#> # … with 3,151 more rows
-```
-
-Additionally, keywords object can be loaded to the data viewer for
-easier filtering, and text search by setting the `data_viewer` argument
-to `TRUE`:
-
-``` r
-get_keywords("National Institutes of Health (NIH)",
-             data_viewer = TRUE)
-```
+Conversely, this function can be run with no argument for a data frame
+of all keywords and agencies cataloged.
 
 #### Info
 
-Development of this package was partly supported by a research grant
-from the National Institute on Alcohol Abuse and Alcoholism - NIH Grant
+Development of this package partly supported by a research grant from
+the National Institute on Alcohol Abuse and Alcoholism - NIH Grant
 \#R34AA026745. This product is not endorsed nor certified by either
 healthdata.gov or NIH/NIAAA.
 

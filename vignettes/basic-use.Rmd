@@ -58,7 +58,7 @@ fetch_catalog("Centers for Disease Control and Prevention",
 
 ## Basic workflow
 
-**healthdatacsv** is pipe friendly, so it's easy to integrate into a tidy workflow. For example, say you're interested in searching CDC datasets related to the built environment.  
+Say you're interested in searching CDC datasets related to the built environment.  
 
 Let's fetch the catalog of available data products:
 
@@ -142,7 +142,7 @@ prams %>%
 
 list_agencies("NIH|CDC|FDA")
 
-list_agencies("Institute|Drug")
+list_agencies("institute|drug")
 
 ```
 

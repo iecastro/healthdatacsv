@@ -1,4 +1,3 @@
-library(healthdatacsv)
 
 test_that("output is tibble", {
   expect_is(get_keywords(), "tbl_df")

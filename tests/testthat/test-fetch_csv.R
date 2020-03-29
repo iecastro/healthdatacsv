@@ -1,4 +1,3 @@
-library(healthdatacsv)
 
 cdc_built_env <- fetch_catalog("Centers for Disease Control and Prevention",
                                keyword = "built environment")

@@ -2,9 +2,7 @@
 % Please edit documentation in R/healthdata-api.R
 \name{fetch_catalog}
 \alias{fetch_catalog}
-\title{Function to fetch the current available catalog from healthdata.gov
-This function allows to pull the catalog in its entirety or filter by
-agency, keyword(s), or both}
+\title{Fetch the available catalog from healthdata.gov}
 \usage{
 fetch_catalog(agency = NULL, keyword = NULL)
 }
@@ -26,13 +24,13 @@ the available catalog including a nested list-column of the
 data distribution.
 }
 \description{
-Function to fetch the current available catalog from healthdata.gov
-This function allows to pull the catalog in its entirety or filter by
-agency, keyword(s), or both
+This function allows users to pull the catalog in its entirety,
+filter by agency, keyword(s), or both
 }
 \examples{
 \dontrun{
 fetch_catalog("Centers for Disease Control and Prevention")
+
 cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
   keyword = "alcohol|alcohol use"
 )

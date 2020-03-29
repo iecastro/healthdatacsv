@@ -68,7 +68,7 @@ fetch_catalog(keyword = "alcohol|drugs")
 ``` r
 fetch_catalog("Centers for Disease Control and Prevention",
                                keyword = "built environment") %>% 
-  fetch_csv()
+  fetch_data()
 #> # A tibble: 1 x 6
 #>   publisher    product     description     modified downloadURL    data_tbl
 #>   <chr>        <chr>       <chr>           <chr>    <chr>          <list>  
@@ -103,14 +103,14 @@ fetch_catalog(keyword = "alcohol")
 # fetch data
 fetch_catalog(keyword = "alcohol") %>% 
   dplyr::slice(1) %>% # dplyr 
-  fetch_csv()
+  fetch_data()
 #> # A tibble: 1 x 6
 #>   publisher    product    description    modified downloadURL     data_tbl 
 #>   <chr>        <chr>      <chr>          <chr>    <chr>           <list>   
 #> 1 Centers for… Alzheimer… "<p>2011-2017… 2020-02… https://data.c… <tibble …
 ```
 
-`fetch_csv()` wraps the [vroom](https://vroom.r-lib.org/) function,
+`fetch_data()` wraps the [vroom](https://vroom.r-lib.org/) function,
 which helps quickly read relatively large delimited files:
 
 ``` r
@@ -121,7 +121,7 @@ prams <- fetch_catalog(keyword = "reproductive health") %>%
   mutate(year = readr::parse_number(product)) %>% 
   filter(year >= 2010) %>% 
   arrange(year) %>% 
-  fetch_csv()
+  fetch_data()
 
 prams %>% 
   select(product, data_tbl)
@@ -163,7 +163,7 @@ This dataset relates to state legislation on nutrition, physical
 activity, and obesity during 2001-2017. Data only includes enacted
 legislation.
 
-To download the data, we pass the catalog object to the `fetch_csv`
+To download the data, we pass the catalog object to the `fetch_data`
 function. Since there is only one dataset to download, we can `unnest`
 in the same pipe. *If the catalog has more than one product that you’d
 like to keep, it is recommended to unnest each product separately.* If
@@ -172,7 +172,7 @@ could unnest in one pipe, given all column names are the same.
 
 ``` r
 data_raw <- cdc_built_env %>%
-  fetch_csv() %>% #> 
+  fetch_data() %>% #> 
   tidyr::unnest(data_tbl)
 
 data_raw
@@ -240,8 +240,8 @@ list_agencies()
 #> # A tibble: 32 x 1
 #>    publisher                                                               
 #>    <chr>                                                                   
-#>  1 Centers for Disease Control and Prevention                              
-#>  2 Centers for Medicare & Medicaid Services                                
+#>  1 Centers for Medicare & Medicaid Services                                
+#>  2 Centers for Disease Control and Prevention                              
 #>  3 Centers for Medicare & Medicaid Services (CMS)                          
 #>  4 Office of the National Coordinator for Health Information Technology    
 #>  5 U.S. Food and Drug Administration                                       

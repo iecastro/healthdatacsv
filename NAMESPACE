@@ -2,7 +2,7 @@
 
 export("%>%")
 export(fetch_catalog)
-export(fetch_csv)
+export(fetch_data)
 export(get_keywords)
 export(list_agencies)
 importFrom(dplyr,as_tibble)

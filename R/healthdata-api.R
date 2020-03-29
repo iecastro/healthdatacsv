@@ -1,6 +1,7 @@
-#' Function to fetch the current available catalog from healthdata.gov
-#' This function allows to pull the catalog in its entirety or filter by
-#' agency, keyword(s), or both
+#' Fetch the available catalog from healthdata.gov
+#'
+#' This function allows users to pull the catalog in its entirety,
+#' filter by agency, keyword(s), or both
 #'
 #' @param agency name of agency to pull in API call.
 #'        This requires the full agency name in proper case.
@@ -17,6 +18,7 @@
 #' @examples
 #' \dontrun{
 #' fetch_catalog("Centers for Disease Control and Prevention")
+#'
 #' cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
 #'   keyword = "alcohol|alcohol use"
 #' )
@@ -73,8 +75,10 @@ fetch_catalog <- function(agency = NULL,
 }
 
 
-#' Function to fetch data from the healthdata.gov API
-#' This function will pull data if available from healthdata.gov in csv format
+#' Fetch data from the healthdata.gov API
+#'
+#' This function will download data healthdata.gov,
+#' if available in csv format
 #'
 #' @param catalog this argument requires a catalog (tibble) created
 #'        with fetch_catalog()
@@ -88,11 +92,11 @@ fetch_catalog <- function(agency = NULL,
 #'
 #' nested_df_alc <- cdc_alc %>%
 #'   dplyr::slice(1:2) %>% # pull Alzheimer's and Chronic Indicators datasets
-#'   fetch_csv()
+#'   fetch_data()
 #' }
 #' @export
 
-fetch_csv <- function(catalog) {
+fetch_data <- function(catalog) {
   df <- catalog %>%
     filter(.data$csv_avail == TRUE)
 

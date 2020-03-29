@@ -1,4 +1,4 @@
-#' Function to extract names of agencies cataloged in the healthdata.gov API
+#' Extract names of agencies cataloged in the healthdata.gov API
 #'
 #' @param agency enter partial name or initials of agency to search
 #'        catalog for string pattern.
@@ -8,7 +8,9 @@
 #' @examples
 #' \dontrun{
 #' list_agencies()
+#'
 #' list_agencies("institute")
+#'
 #' list_agencies("substance abuse")
 #' }
 #' @export
@@ -43,7 +45,7 @@ list_agencies <- function(agency = NULL) {
 }
 
 
-#' Helper function to extract keywords listed in the healthdata.gov API
+#' Extract keywords listed in the healthdata.gov API
 #'
 #' @param agency enter full agency name in title case (results from
 #'        list_agencies()) to pull keywords tagged in the listed
@@ -53,6 +55,7 @@ list_agencies <- function(agency = NULL) {
 #' @examples
 #' \dontrun{
 #' get_keywords()
+#'
 #' get_keywords("Centers for Disease Control and Prevention")
 #' }
 #' @export

@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{get_keywords}
 \alias{get_keywords}
-\title{Helper function to extract keywords listed in the healthdata.gov API}
+\title{Extract keywords listed in the healthdata.gov API}
 \usage{
 get_keywords(agency = NULL)
 }
@@ -16,11 +16,12 @@ a \code{\link[tibble:tibble]{tibble}} with publisher (agency)
 name(s) and respective keywords
 }
 \description{
-Helper function to extract keywords listed in the healthdata.gov API
+Extract keywords listed in the healthdata.gov API
 }
 \examples{
 \dontrun{
 get_keywords()
+
 get_keywords("Centers for Disease Control and Prevention")
 }
 }

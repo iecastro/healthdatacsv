@@ -51,7 +51,7 @@ fetch_catalog("National Institutes of Health (NIH)")
 ```{r}
 fetch_catalog("Centers for Disease Control and Prevention",
                                keyword = "built environment") %>% 
-  fetch_csv()
+  fetch_data()
 
 ```
 
@@ -80,11 +80,11 @@ cdc_built_env %>%
 
 This dataset relates to state legislation on nutrition, physical activity, and obesity during 2001-2017.  Data only includes enacted legislation.
 
-To download the data, we pass the catalog df to the `fetch_csv` function.  Data are nested in a list-column, and since there is only one dataset to download, we can `unnest` in the same pipe.  
+To download the data, we pass the catalog df to the `fetch_data` function.  Data are nested in a list-column, and since there is only one dataset to download, we can `unnest` in the same pipe.  
 
 ```{r}
 data_raw <- cdc_built_env %>%
-  fetch_csv() %>% #> 
+  fetch_data() %>% #> 
   tidyr::unnest(data_tbl)
 
 ```
@@ -120,7 +120,7 @@ prams <- fetch_catalog(keyword = "reproductive health") %>%
   mutate(year = readr::parse_number(product)) %>% 
   filter(year > 2009) %>% 
   arrange(year) %>% 
-  fetch_csv()
+  fetch_data()
 
 ```
 

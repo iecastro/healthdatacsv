@@ -26,11 +26,12 @@ Imports:
     vroom,
     httpcache
 Suggests: 
-    readr,
-    testthat (>= 2.1.0),
     covr,
+    httptest,
     knitr,
-    rmarkdown
+    readr,
+    rmarkdown,
+    testthat (>= 2.1.0)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

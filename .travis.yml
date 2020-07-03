@@ -7,12 +7,17 @@ r:
   - release
   - devel
 
-os:
-  - linux
-  - osx
-
 matrix:
-  fast_finish: true
+  #fast_finish: true
+  include:
+     - os: osx
+      brew_packages: curl
+      env: PKG_CONFIG_PATH="/usr/local/opt/curl/lib/pkgconfig"
+    - os: osx
+      brew_packages: curl-openssl
+      env:
+        - PKG_CONFIG_PATH="/usr/local/opt/curl-openssl/lib/pkgconfig"
+        - HTTPBIN_TEST_SERVER="https://nghttp2.org/httpbin"
   allow_failures:
     - r: devel
       os: osx
@@ -23,10 +28,9 @@ matrix:
 cache: packages
 
 addons:
-  homebrew:
+  apt:
     packages:
-    - curl
-    - curl-openssl
+    - libcurl4-openssl-dev
 
 after_success:
   - Rscript -e 'covr::codecov()'

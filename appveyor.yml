@@ -23,9 +23,9 @@ environment:
 # Adapt as necessary starting from here
 
   matrix:
-  - R_VERSION: devel
-    R_ARCH: x64
-    CURL_SSL_BACKEND: openssl
+  #- R_VERSION: devel
+  #  R_ARCH: x64
+  #  CURL_SSL_BACKEND: openssl
 
   - R_VERSION: release
     R_ARCH: x64

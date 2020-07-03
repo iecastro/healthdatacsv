@@ -86,9 +86,9 @@ get_keywords <- function(agency = NULL) {
   if(nrow(keywords) == 0){
     message(
       paste0("Your query did not return any results. ",
-             "This is likely because",
-             "`", agency, "`",
-             "does not match the catalog.",
+             "\nThis is likely because ",
+             "*", agency, "*",
+             " does not match the catalog.",
              "\nUse list_agencies() to find agency names in the catalog.")
     )
   }

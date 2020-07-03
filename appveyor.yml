@@ -25,11 +25,15 @@ environment:
   matrix:
   - R_VERSION: devel
     R_ARCH: x64
+    CURL_SSL_BACKEND: openssl
 
   - R_VERSION: release
     R_ARCH: x64
+    CURL_SSL_BACKEND: openssl
 
   - R_VERSION: patched
+    CURL_SSL_BACKEND: openssl
+
 
 matrix:
   fast_finish: true

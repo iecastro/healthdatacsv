@@ -17,8 +17,16 @@ matrix:
     - r: devel
       os: osx
 
+    - r: devel
+      os: linux
+
 cache: packages
-sudo: required
+
+addons:
+  homebrew:
+    packages:
+    - curl
+    - curl-openssl
 
 after_success:
   - Rscript -e 'covr::codecov()'

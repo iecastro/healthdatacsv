@@ -139,7 +139,9 @@ healthdata_api <- function(path) {
     path = path
   )
 
-  response <- GET(data_url, user)
+  httpcache::startLog()
+
+  response <- httpcache::GET(data_url, user)
 
   parsed <- jsonlite::fromJSON(httr::content(response, "text",
                                              encoding = "UTF-8"))

@@ -4,7 +4,8 @@
 #' @name healthdatacsv
 #'
 #' @importFrom dplyr as_tibble select mutate filter distinct
-#' @importFrom httr user_agent modify_url GET http_error status_code
+#' @importFrom httr user_agent modify_url http_error status_code
+#' @importFrom httpcache GET startLog
 #' @importFrom jsonlite fromJSON flatten
 #' @importFrom stringr str_detect regex
 #' @importFrom purrr map map_lgl

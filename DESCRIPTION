@@ -23,7 +23,8 @@ Imports:
     stringr,
     tibble,
     tidyr,
-    vroom
+    vroom,
+    httpcache
 Suggests: 
     readr,
     testthat (>= 2.1.0),

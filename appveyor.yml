@@ -22,7 +22,10 @@ environment:
 
 # Adapt as necessary starting from here
 
-  matrix:
+environment:
+  - USE_RTOOLS: true
+
+matrix:
   - R_VERSION: devel
     R_ARCH: x64
 

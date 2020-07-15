@@ -32,5 +32,5 @@ addons:
     packages:
     - libcurl4-openssl-dev
 
-after_success:
-  - Rscript -e 'covr::codecov()'
+#after_success:
+#  - Rscript -e 'covr::codecov()'

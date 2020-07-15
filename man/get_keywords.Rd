@@ -8,8 +8,8 @@ get_keywords(agency = NULL)
 }
 \arguments{
 \item{agency}{enter full agency name in title case (results from
-get_agencies()) to pull keywords tagged in the listed
-agency's products. Defaults to NULL and pulls all keywords cataloged}
+\code{get_agencies()}) to pull keywords tagged in the listed
+agency's products. Defaults to \code{NULL} and pulls all keywords cataloged}
 }
 \value{
 a \code{\link[tibble:tibble]{tibble}} with publisher (agency)

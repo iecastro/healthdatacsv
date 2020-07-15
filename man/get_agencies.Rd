@@ -9,7 +9,7 @@ get_agencies(agency = NULL)
 \arguments{
 \item{agency}{enter partial name or initials of agency to search
 catalog for string pattern.
-Defaults to NULL and pulls all agencies cataloged in API}
+Defaults to \code{NULL} and pulls all agencies cataloged in API}
 }
 \value{
 a \code{\link[tibble:tibble]{tibble}} of names

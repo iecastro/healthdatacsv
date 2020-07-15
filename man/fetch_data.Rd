@@ -8,14 +8,15 @@ fetch_data(catalog)
 }
 \arguments{
 \item{catalog}{this argument requires a catalog (tibble) created
-with fetch_catalog()}
+with \code{fetch_catalog()}}
 }
 \value{
 a \code{\link[tibble:tibble]{tibble}} with descriptive metadata
 of a data product and a list-column of the available dataset.
 }
 \description{
-This function will download data healthdata.gov,
+This function will download data from
+\href{https://healthdata.gov/}{healthdata.gov},
 if available in csv format
 }
 \examples{

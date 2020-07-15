@@ -7,15 +7,15 @@
 #' @return a [`tibble`][tibble::tibble()] of names
 #' @examples
 #' \dontrun{
-#' list_agencies()
+#' get_agencies()
 #'
-#' list_agencies("institute")
+#' get_agencies("institute")
 #'
-#' list_agencies("substance abuse")
+#' get_agencies("substance abuse")
 #' }
 #' @export
 
-list_agencies <- function(agency = NULL) {
+get_agencies <- function(agency = NULL) {
 
   api_call <- healthdata_api("data.json")
 
@@ -48,7 +48,7 @@ list_agencies <- function(agency = NULL) {
 #' Extract keywords listed in the healthdata.gov API
 #'
 #' @param agency enter full agency name in title case (results from
-#'        list_agencies()) to pull keywords tagged in the listed
+#'        get_agencies()) to pull keywords tagged in the listed
 #'        agency's products. Defaults to NULL and pulls all keywords cataloged
 #' @return a [`tibble`][tibble::tibble()] with publisher (agency)
 #'         name(s) and respective keywords
@@ -89,7 +89,7 @@ get_keywords <- function(agency = NULL) {
              "\nThis is likely because ",
              "*", agency, "*",
              " does not match the catalog.",
-             "\nUse list_agencies() to find agency names in the catalog.")
+             "\nUse get_agencies() to find agency names in the catalog.")
     )
   }
 

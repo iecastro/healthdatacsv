@@ -8,7 +8,7 @@ get_keywords(agency = NULL)
 }
 \arguments{
 \item{agency}{enter full agency name in title case (results from
-list_agencies()) to pull keywords tagged in the listed
+get_agencies()) to pull keywords tagged in the listed
 agency's products. Defaults to NULL and pulls all keywords cataloged}
 }
 \value{

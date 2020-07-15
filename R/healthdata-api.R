@@ -5,7 +5,7 @@
 #'
 #' @param agency name of agency to pull in API call.
 #'        This requires the full agency name in proper case.
-#'        Function list_agencies() can be used for a list of
+#'        Function get_agencies() can be used for a list of
 #'        available agencies. Defaults to NULL.
 #' @param keyword keyword(s) to pull in API call.
 #'        This argument can be supplied on its own or with an agency argument.

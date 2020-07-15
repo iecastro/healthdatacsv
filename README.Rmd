@@ -135,23 +135,23 @@ data_raw
 
 ### Some helper functions
 
-`list_agencies()` will query and download names of agencies listed in the catalog. You can enter partial name or initials of agency of interest to check if it has data cataloged in the API. Argument relies on [regular expression](https://stringr.tidyverse.org/articles/regular-expressions.html) to detect string matches.
+`get_agencies()` will query and download names of agencies listed in the catalog. You can enter partial name or initials of agency of interest to check if it has data cataloged in the API. Argument relies on [regular expression](https://stringr.tidyverse.org/articles/regular-expressions.html) to detect string matches.
 
 ```{r}
 
-list_agencies("NIH|CDC|FDA")
+get_agencies("NIH|CDC|FDA")
 
-list_agencies("Institute|Drug")
+get_agencies("Institute|Drug")
 
 ```
 
-The resulting dataframe will depend on matches to the string supplied. To pull all agencies cataloged, simply use `list_agencies` with the default argument:
+The resulting dataframe will depend on matches to the string supplied. To pull all agencies cataloged, simply use `get_agencies` with the default argument:
 
 ```{r}
-list_agencies()
+get_agencies()
 ```
 
-`get_keywords()` will extract all keywords cataloged. The function accepts as argument a full *agency* name (in proper title case) which can be obtained with `list_agencies`.  
+`get_keywords()` will extract all keywords cataloged. The function accepts as argument a full *agency* name (in proper title case) which can be obtained with `get_agencies`.  
 
 ```{r}
 get_keywords("National Institutes of Health (NIH)")

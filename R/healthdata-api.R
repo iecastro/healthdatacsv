@@ -68,10 +68,10 @@ fetch_catalog_process <- function(api_call, agency, keyword){
   }
 
   if (is.null(keyword)) {
-    catalog %>%
+    catalog <- catalog %>%
       select(-.data$keyword)
   } else {
-    catalog %>%
+    catalog <- catalog %>%
       mutate(
         keyword = purrr::map(
           keyword,
@@ -83,7 +83,21 @@ fetch_catalog_process <- function(api_call, agency, keyword){
       select(-.data$keyword)
   }
 
-
+  if(nrow(catalog) == 0){
+    message(
+      paste("Your query did not return any results.",
+            "This is likely because: \n1)",
+            paste0("`agency = ",agency,"`"),
+            "does not match the catalog.",
+            "\n2)", paste0("`keyword = ", keyword,"`"), "is misspelled",
+            "\n3) The combination of", paste0("`agency = ",agency,"`"),
+            "and", paste0("`keyword = ", keyword,"`"),
+            "does not exist in the catalog.",
+            "\nUse get_agencies() to find agency names as listed in the catalog,",
+            "\nor get_keywords() to find all agency/keyword pairings.",
+            "\nYeah... I know")
+    )
+  } else { catalog }
 
 }
 

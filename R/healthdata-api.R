@@ -30,6 +30,16 @@ fetch_catalog <- function(agency = NULL,
 
   api_call <- healthdata_api("data.json")
 
+  fetch_catalog_process(api_call, agency, keyword)
+
+}
+
+
+#' Catalog fetching process call for data.json endpoint
+#' @noRd
+
+fetch_catalog_process <- function(api_call, agency, keyword){
+
   parsed <- api_call$parsed
 
   parsed_dataset <- parsed$dataset
@@ -72,6 +82,9 @@ fetch_catalog <- function(agency = NULL,
       filter(.data$keyword == TRUE) %>%
       select(-.data$keyword)
   }
+
+
+
 }
 
 

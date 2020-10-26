@@ -17,3 +17,11 @@ test_that("columns separated", {
                      ncol(),
                    1)
 })
+
+
+nodata <- fetch_catalog() %>%
+  filter(csv_avail == FALSE)
+
+test_that("message is displayed", {
+  expect_error(fetch_data(nodata))
+})

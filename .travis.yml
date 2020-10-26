@@ -8,11 +8,8 @@ r:
   - devel
 
 cache: packages
-
-addons:
-  apt:
-    packages:
-    - libcurl4-openssl-dev
+sudo: required
+dist: trusty
 
 warnings_are_errors: false
 

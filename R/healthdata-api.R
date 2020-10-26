@@ -1,7 +1,11 @@
 #' Fetch the available catalog from healthdata.gov
 #'
-#' This function allows users to pull the catalog in its entirety,
-#' filter by agency, keyword(s), or both
+#' This function allows users to read the available
+#' [healthdata.gov](https://healthdata.gov/) catalog into R.  The
+#' catalog can be downloaded in its entirety, filtered by agency,
+#' keyword(s), or both.  The catalog consists of name and description
+#' of the available data products in the data API endpoint, as well
+#' as distribution metadata (download url, format, modified date...).
 #'
 #' @param agency name of agency to pull in API call.
 #'        This requires the full agency name in proper case.
@@ -104,9 +108,10 @@ fetch_catalog_process <- function(api_call, agency, keyword){
 
 #' Fetch data from the healthdata.gov API
 #'
-#' This function will download data from
-#' [healthdata.gov](https://healthdata.gov/),
-#' if available in csv format
+#' This function will download data from [healthdata.gov](https://healthdata.gov/),
+#' when supplied a tibble created with `fetch_catalog()`. The function will search
+#' for data products that are available in CSV format.CSV is chosen because it's
+#' the most common and simplest format available to download directly from the API.
 #'
 #' @param catalog this argument requires a catalog (tibble) created
 #'        with `fetch_catalog()`
@@ -119,7 +124,8 @@ fetch_catalog_process <- function(api_call, agency, keyword){
 #' )
 #'
 #' nested_df_alc <- cdc_alc %>%
-#'   dplyr::slice(1:2) %>% # pull Alzheimer's and Chronic Indicators datasets
+#'   # pull Alzheimer's and Chronic Indicators datasets
+#'   dplyr::slice(1:2) %>%
 #'   fetch_data()
 #' }
 #' @export

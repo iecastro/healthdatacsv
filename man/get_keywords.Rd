@@ -16,7 +16,9 @@ a \code{\link[tibble:tibble]{tibble}} with publisher (agency)
 name(s) and respective keywords
 }
 \description{
-Extract keywords listed in the healthdata.gov API
+This is a helper function that will download either all keywords
+listed in the \href{https://healthdata.gov/}{healthdata.gov} data API, or
+pairings of agency and keywords listed.
 }
 \examples{
 \dontrun{

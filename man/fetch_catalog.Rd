@@ -24,8 +24,12 @@ the available catalog including a nested list-column of the
 data distribution.
 }
 \description{
-This function allows users to pull the catalog in its entirety,
-filter by agency, keyword(s), or both
+This function allows users to read the available
+\href{https://healthdata.gov/}{healthdata.gov} catalog into R.  The
+catalog can be downloaded in its entirety, filtered by agency,
+keyword(s), or both.  The catalog consists of name and description
+of the available data products in the data API endpoint, as well
+as distribution metadata (download url, format, modified date...).
 }
 \examples{
 \dontrun{

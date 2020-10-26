@@ -15,9 +15,10 @@ a \code{\link[tibble:tibble]{tibble}} with descriptive metadata
 of a data product and a list-column of the available dataset.
 }
 \description{
-This function will download data from
-\href{https://healthdata.gov/}{healthdata.gov},
-if available in csv format
+This function will download data from \href{https://healthdata.gov/}{healthdata.gov},
+when supplied a tibble created with \code{fetch_catalog()}. The function will search
+for data products that are available in CSV format.CSV is chosen because it's
+the most common and simplest format available to download directly from the API.
 }
 \examples{
 \dontrun{
@@ -26,7 +27,8 @@ cdc_alc <- fetch_catalog("Centers for Disease Control and Prevention",
 )
 
 nested_df_alc <- cdc_alc \%>\%
-  dplyr::slice(1:2) \%>\% # pull Alzheimer's and Chronic Indicators datasets
+  # pull Alzheimer's and Chronic Indicators datasets
+  dplyr::slice(1:2) \%>\%
   fetch_data()
 }
 }

@@ -15,7 +15,9 @@ Defaults to \code{NULL} and pulls all agencies cataloged in API}
 a \code{\link[tibble:tibble]{tibble}} of names
 }
 \description{
-Extract names of agencies cataloged in the healthdata.gov API
+This function will download a list of Agencies listed as having
+an available data product in the
+\href{https://healthdata.gov/}{healthdata.gov} data API endpoint.
 }
 \examples{
 \dontrun{

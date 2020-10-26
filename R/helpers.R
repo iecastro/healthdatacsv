@@ -1,5 +1,9 @@
 #' Extract names of agencies cataloged in the healthdata.gov API
 #'
+#' This function will download a list of Agencies listed as having
+#' an available data product in the
+#' [healthdata.gov](https://healthdata.gov/) data API endpoint.
+#'
 #' @param agency enter partial name or initials of agency to search
 #'        catalog for string pattern.
 #'        Defaults to `NULL` and pulls all agencies cataloged in API
@@ -46,6 +50,10 @@ get_agencies <- function(agency = NULL) {
 
 
 #' Extract keywords listed in the healthdata.gov API
+#'
+#' This is a helper function that will download either all keywords
+#' listed in the [healthdata.gov](https://healthdata.gov/) data API, or
+#' pairings of agency and keywords listed.
 #'
 #' @param agency enter full agency name in title case (results from
 #'        `get_agencies()`) to pull keywords tagged in the listed

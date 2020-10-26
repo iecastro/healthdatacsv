@@ -9,15 +9,6 @@ r:
 
 matrix:
   fast_finish: true
-  include:
-     - os: osx
-      brew_packages: curl
-      env: PKG_CONFIG_PATH="/usr/local/opt/curl/lib/pkgconfig"
-    - os: osx
-      brew_packages: curl-openssl
-      env:
-        - PKG_CONFIG_PATH="/usr/local/opt/curl-openssl/lib/pkgconfig"
-        - HTTPBIN_TEST_SERVER="https://nghttp2.org/httpbin"
   allow_failures:
     - r: devel
       os: osx
@@ -32,5 +23,7 @@ addons:
     packages:
     - libcurl4-openssl-dev
 
+warnings_are_errors: false
+
 #after_success:
-#  - Rscript -e 'covr::codecov()'
+#  - Rscript -e 'covr::code

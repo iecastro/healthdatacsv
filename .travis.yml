@@ -7,15 +7,6 @@ r:
   - release
   - devel
 
-matrix:
-  fast_finish: true
-  allow_failures:
-    - r: devel
-      os: osx
-
-    - r: devel
-      os: linux
-
 cache: packages
 
 addons:

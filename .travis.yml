@@ -8,7 +8,7 @@ r:
   - devel
 
 matrix:
-  #fast_finish: true
+  fast_finish: true
   include:
      - os: osx
       brew_packages: curl
